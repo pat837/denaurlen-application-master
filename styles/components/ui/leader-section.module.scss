@@ -1,0 +1,39 @@
+@use '../../utils/variables' as var;
+@use '../../utils/theme';
+
+.wrapper {
+  position: sticky;
+  padding: 0.8rem;
+  top: calc(var(--appbar-height) + 1rem);
+
+  box-shadow: var.$shadow;
+  @include theme.bg-color('card');
+  @include theme.radius('m');
+
+  display: grid;
+  gap: 0.75rem;
+
+  h5 {
+    @include theme.title2;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    list-style: none;
+    [data-rank] {
+      text-align: center !important;
+      @include theme.title1;
+    }
+
+    & * {
+      box-shadow: none !important;
+    }
+  }
+
+  .btn_wrapper {
+    display: grid;
+    place-items: center;
+  }
+}

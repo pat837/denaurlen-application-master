@@ -1,0 +1,25 @@
+@use './utils/variables' as var;
+@use './utils/mixins';
+
+.container {
+  position: relative;
+  border-right: 1px solid map-get($map: var.$background-color, $key: 'wrapper');
+  z-index: 3;
+  @include mixins.background-blur();
+
+  .wrapper {
+    position: sticky;
+    top: var(--appbar-height);
+    width: 100%;
+    padding-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    color: map-get($map: var.$text-color, $key: 'disabled');
+
+    svg {
+      color: map-get($map: var.$text-color, $key: 'secondary');
+    }
+  }
+}

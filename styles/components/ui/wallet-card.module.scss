@@ -1,0 +1,231 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.card_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.wrapper {
+  display: grid;
+  place-items: center;
+}
+
+@mixin card_dimensions {
+  width: 100% !important;
+  max-width: 340px !important;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'card') !important;
+  border-radius: map-get($map: var.$border-radius, $key: 'l') !important;
+  overflow: hidden !important;
+}
+
+@mixin blob {
+  content: '';
+  position: absolute;
+
+  display: block;
+  width: 100% !important;
+  max-width: 360px !important;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'square');
+  border-radius: map-get($map: var.$border-radius, $key: 'max');
+}
+
+@mixin silver_card {
+  background: linear-gradient(45deg, #f0f0f0, #ffffff, #eee);
+
+  &::before {
+    background-color: #a3a3a3;
+  }
+  &::after {
+    background-color: #e6e6e6;
+  }
+  .user {
+    p {
+      @include mixins.subtitle1;
+      color: lighten($color: #000000, $amount: 20%);
+    }
+    span {
+      font-size: 1.36em;
+      font-weight: 600;
+      color: lighten($color: #000000, $amount: 20%);
+      letter-spacing: 0.1em;
+    }
+    time {
+      @include mixins.body1;
+      letter-spacing: 0em;
+      color: lighten($color: #000000, $amount: 25%);
+      span {
+        @include mixins.caption;
+      }
+    }
+  }
+}
+
+@mixin gold_card {
+  background-color: gold;
+}
+
+@mixin platinum_card {
+  background-color: palegreen;
+}
+
+.card_loader {
+  @include card_dimensions();
+}
+
+.generate_button {
+  @include card_dimensions();
+
+  aspect-ratio: 2.5 !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  background-color: map-get($map: var.$background-color, $key: 'surface') !important;
+
+  svg {
+    width: 48px;
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+  span {
+    @include mixins.body1();
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+}
+
+.popup {
+  display: grid;
+  place-items: center;
+
+  h3 {
+    @include mixins.heading5;
+    text-align: center;
+  }
+
+  .btn_grp {
+    padding-top: 2rem;
+    width: 100%;
+    max-width: 360px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.popup_wrapper {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+
+  p {
+    @include mixins.body1();
+
+    color: map-get($map: var.$text-color, $key: 'secondary');
+    text-align: center;
+    line-height: 1.6;
+
+    span {
+      @include mixins.subtitle2;
+    }
+  }
+
+  .otp {
+    margin-block: 0.6rem 0.2rem;
+    padding: 0.8rem 1rem;
+    width: 24ch;
+
+    @include theme.title2();
+    text-align: center;
+    letter-spacing: 0.2em;
+
+    border: none;
+    outline: none;
+    background-color: map-get($map: var.$background-color, $key: 'surface');
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+
+    &::-webkit-input-placeholder,
+    &:-ms-input-placeholder,
+    &::placeholder {
+      @include mixins.body2();
+      line-height: 100%;
+      letter-spacing: 0.1em;
+      transform: scale(0.8);
+    }
+  }
+}
+
+.card {
+  @include card_dimensions();
+
+  position: relative;
+
+  &::before {
+    @include blob();
+    inset: 0;
+    transform-origin: center;
+    border-radius: map-get($map: var.$border-radius, $key: 'l') !important;
+    overflow: hidden;
+  }
+
+  .blur {
+    position: absolute;
+    inset: 0;
+    @include mixins.background-blur(transparent);
+    z-index: 2;
+    border-radius: map-get($map: var.$border-radius, $key: 'l') !important;
+    overflow: hidden;
+  }
+
+  .card_details {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: map-get($map: var.$border-radius, $key: 'l') !important;
+    overflow: hidden !important;
+    .user {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+
+      span {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .logo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 18px;
+    }
+  }
+
+  &.silver {
+    @include silver_card();
+  }
+  &.gold {
+    @include gold_card();
+  }
+  &.platinum {
+    @include platinum_card();
+  }
+}
+
+.actions {
+  $max-width: 340px;
+  $padding: calc(calc(100% - $max-width) / 2);
+  padding-left: $padding;
+  width: 100% !important;
+  max-width: calc($max-width + $padding) !important;
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}

@@ -1,0 +1,51 @@
+//colors
+@function color($color-name) {
+  @return var(--color-#{$color-name});
+}
+
+@function variable($var) {
+  @return var(--#{$var});
+}
+
+$accent-color: color(accent);
+$light-accent-color: color(light-accent);
+
+$root-padding: variable(root-padding);
+$appbar-height: 60px;
+
+$shadow: color(shadow);
+
+$likeColor: #f44336;
+$like-color: #f44336;
+
+$background-color: (
+  'paper': color(paper),
+  'card': color(card),
+  'surface': color(surface),
+  'blur': color(blur-bg),
+  'wrapper': color(wrapper)
+);
+
+$text-color: (
+  'primary': color(text-primary),
+  'secondary': color(text-secondary),
+  'disabled': color(text-disabled),
+  'button': color(text-button)
+);
+
+//border-radius
+$border-radius: (
+  's': 6px,
+  'm': 10px,
+  'l': 16px,
+  'xl': 24px,
+  'max': 100vmax
+);
+
+// aspect ratios
+$aspect-ratio: (
+  'premium': calc(8.5 / 11),
+  'square': 1,
+  '5:4': calc(5 / 4),
+  'card': 1.5858
+);

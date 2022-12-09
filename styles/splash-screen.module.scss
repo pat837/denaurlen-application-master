@@ -1,0 +1,40 @@
+@use './utils/variables' as var;
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  z-index: 99999;
+
+  .container {
+    $size: min(38vmin, 570px);
+    width: $size;
+    height: $size;
+    display: grid;
+    place-items: center;
+
+    svg {
+      width: calc($size - 5vmin);
+    }
+  }
+}
+
+.u {
+  transform-origin: center;
+  animation: u_animation 1.5s ease 0s infinite normal forwards;
+}
+
+@keyframes u_animation {
+  0% {
+    transform: rotate(0);
+  }
+
+  95% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

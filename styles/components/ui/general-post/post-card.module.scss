@@ -1,0 +1,339 @@
+@use '../../../utils/mixins';
+@use '../../../utils/theme';
+@use '../../../utils/variables' as var;
+
+$card-radius: map-get(
+  $map: var.$border-radius,
+  $key: 'm'
+);
+$card-color: map-get(
+  $map: var.$background-color,
+  $key: 'card'
+);
+
+$padding: 1rem;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+
+  @media screen and (max-width: 490px) {
+    border-bottom: 1px solid map-get($map: var.$background-color, $key: 'surface');
+  }
+
+  @media screen and (min-width: 550px) {
+    box-shadow: var.$shadow;
+  }
+}
+
+.card_header {
+  $radius: $card-radius;
+  padding: 0.5rem calc($padding - 4px) 6px $padding;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: $card-color;
+
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+.profile_section {
+  display: flex;
+  align-items: center;
+  gap: 0.36rem;
+
+  div {
+    display: grid;
+    gap: 0.15rem;
+
+    p {
+      @include theme.body2();
+      @include mixins.text-ellipsis(16ch);
+      @include theme.text-color('primary');
+    }
+    span {
+      @include mixins.caption();
+      @include mixins.text-ellipsis(16ch);
+      @include theme.text-color('disabled');
+    }
+  }
+}
+
+.post_wrapper {
+  --aspect-ratio: 1;
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: var(--aspect-ratio);
+
+  background-color: map-get($map: var.$background-color, $key: 'wrapper');
+  overflow: hidden;
+
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  &:focus {
+    outline: none !important;
+  }
+
+  .like_icon {
+    position: absolute;
+    color: var.$like-color;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 5%;
+    opacity: 0;
+    transition: all 0.2s ease-in;
+  }
+
+  &.active_like {
+    .like_icon {
+      opacity: 1;
+      width: 20%;
+    }
+  }
+
+  .snap_container {
+    --no-of-pictures: 1;
+
+    position: absolute;
+    inset: 0 !important;
+
+    display: grid;
+    grid-template-columns: repeat(var(--no-of-pictures), 100%);
+
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      display: none !important;
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+  }
+
+  .post {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    scroll-snap-align: start;
+  }
+
+  .video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .video_icon,
+  .multi_post {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    cursor: pointer;
+
+    svg {
+      color: #fff;
+    }
+  }
+  .multi_post {
+    cursor: default;
+  }
+
+  .volume_icon,
+  .tag_icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+
+    transform: scale(0.8) !important;
+
+    @include mixins.background-blur(rgba(38, 38, 38, 0.38));
+
+    @include mixins.pulse-animation();
+
+    svg {
+      width: 22px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+  }
+  .tag_icon {
+    inset: auto auto 10px 10px;
+  }
+  .indicator {
+    @include mixins.background-blur(rgba(38, 38, 38, 0.5));
+    @include mixins.caption();
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    color: rgba(255, 255, 255, 0.86);
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+    overflow: hidden;
+  }
+}
+
+.caption_wrapper {
+  width: 100%;
+  padding: 0.86rem $padding 0;
+  background-color: $card-color;
+}
+
+.caption {
+  padding: 12px 10px;
+  background-color: map-get($map: var.$background-color, $key: 'paper');
+  border-radius: map-get($map: var.$border-radius, $key: 's');
+
+  p {
+    @include mixins.body2;
+    color: map-get($map: var.$text-color, $key: 'secondary');
+    white-space: pre-line;
+    line-height: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  a {
+    color: var.$accent-color;
+    text-decoration: none;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.post_footer {
+  $radius: $card-radius;
+  padding: 0.9rem $padding 0.8rem calc($padding + 4px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.86rem;
+  background-color: $card-color;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+.footer_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    color: map-get($map: var.$text-color, $key: 'secondary') !important;
+  }
+}
+
+.like_comment_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post_details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    .count {
+      color: map-get($map: var.$text-color, $key: 'secondary');
+    }
+    @include mixins.body2();
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+
+  time {
+    @include mixins.caption();
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+}
+
+.post_button {
+  @include mixins.pulse-animation();
+
+  svg {
+    width: 26px;
+    height: 26px;
+    color: map-get($map: var.$text-color, $key: 'secondary') !important;
+  }
+}
+
+.indicator_wrapper {
+  padding-top: 0.36rem;
+  height: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background-color: map-get($map: var.$background-color, $key: 'card');
+
+  .dot {
+    display: inline-block;
+    $size: 0.44rem !important;
+    padding: 0;
+    margin: 0;
+    width: $size;
+    height: $size;
+    background-color: var.$accent-color;
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+    opacity: 0.5;
+    transition: all 0.2s ease;
+
+    &.active {
+      $size: 0.7rem !important;
+      width: $size;
+      opacity: 1;
+    }
+  }
+}
+
+.arrows_btn {
+  position: absolute;
+  top: calc(50% - 1.6rem / 2);
+  width: 1.6rem;
+
+  display: grid;
+  place-items: center;
+
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'square');
+  border-radius: map-get($map: var.$border-radius, $key: 'max');
+  overflow: hidden;
+
+  @include mixins.background-blur();
+  @include mixins.pulse-animation();
+
+  svg {
+    width: 1.2rem;
+    color: map-get($map: var.$text-color, $key: 'primary');
+  }
+  &.left {
+    left: 0.4rem;
+  }
+  &.right {
+    right: 0.4rem;
+  }
+}

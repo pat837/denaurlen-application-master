@@ -1,0 +1,35 @@
+.like-card-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+
+  .like-card {
+    display: flex;
+    align-items: center;
+
+    [data-user] {
+      margin-left: 4px;
+      display: grid;
+      gap: 4px;
+
+      p {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        display: flex;
+        align-items: center;
+      }
+
+      span {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        display: flex;
+        align-items: center;
+        color: #444;
+      }
+    }
+  }
+}

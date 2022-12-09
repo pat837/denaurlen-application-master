@@ -1,0 +1,287 @@
+@use './utils/variables' as var;
+@use './utils/mixins';
+@use './utils/theme';
+
+$height: 60px;
+
+.wrapper {
+  top: auto !important;
+  bottom: 0 !important;
+  display: grid !important;
+  background-color: map-get($map: var.$background-color, $key: 'card') !important;
+  border-top: 0.05rem solid map-get($map: var.$background-color, $key: 'paper') !important;
+
+  @include mixins.background-blur(map-get($map: var.$background-color, $key: 'blur'), 74px);
+
+  nav {
+    padding: 10px 24px;
+    display: flex;
+    align-items: stretch;
+    min-height: $height;
+
+    & > * {
+      flex: 1;
+
+      border-radius: 8px !important;
+
+      svg {
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+    }
+
+    @media only screen and (min-width: 490px) {
+      padding: 10px 36px;
+    }
+  }
+}
+
+.fix {
+  min-height: $height;
+}
+
+$radius: 16px;
+
+.root {
+  @include mixins.background-blur(transparent, 1rem);
+}
+.bottom-menu-wrapper {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  padding: 36px 24px;
+  display: grid;
+  place-items: center !important;
+
+  .bottom-menu {
+    width: 100%;
+    max-width: 570px;
+
+    .profile {
+      padding-bottom: 1rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .avatar {
+        --avatar-size: 3.8rem;
+      }
+
+      [data-profile-wrapper] {
+        padding: 0.7rem 1rem !important;
+        display: flex;
+        align-items: center;
+        border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+
+        p {
+          margin-left: 14px;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 20px;
+          color: map-get($map: var.$text-color, $key: 'primary');
+
+          span {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+
+    .link-wrapper {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      div {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+
+        .link {
+          padding: 10px 10px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          border-radius: 6px !important;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: rgba(136, 136, 136, 0.1);
+          }
+
+          svg {
+            width: 24px !important;
+            color: map-get($map: var.$text-color, $key: 'secondary');
+          }
+
+          p {
+            margin-left: 0.7ch;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: map-get($map: var.$text-color, $key: 'primary');
+          }
+        }
+      }
+
+      @media only screen and (min-width: 599.99px) {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 6px;
+
+        div {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+  }
+}
+
+.add-option-wrapper {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  padding: 36px 24px;
+
+  .btn_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    .add-btn {
+      color: map-get($map: var.$text-color, $key: 'secondary');
+      display: grid;
+      place-items: center;
+      gap: 10px;
+
+      button {
+        width: 70px;
+        height: 76px;
+        background-color: map-get($map: var.$background-color, $key: 'surface');
+        border-radius: map-get($map: var.$border-radius, $key: 'm');
+
+        svg {
+          width: 28px !important;
+        }
+      }
+
+      p {
+        @include mixins.caption();
+        line-height: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+    }
+  }
+}
+
+.popup_root {
+  @include mixins.background-blur(transparent);
+}
+
+.add-option-popup {
+  display: grid;
+  place-content: center;
+  gap: 28px;
+
+  h5 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+
+  [data-btn-wrapper] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 38px;
+
+    .add-btn {
+      @include theme.text-color('secondary');
+      display: grid;
+      place-items: center;
+      gap: 10px;
+
+      button {
+        @include theme.bg-color('surface');
+        width: 111px;
+        height: 114px;
+        box-sizing: border-box;
+        border-radius: 6px;
+
+        svg {
+          width: 48px !important;
+        }
+      }
+
+      p {
+        @include theme.title2;
+        @include theme.text-color('disabled');
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.criteria_popup {
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+
+  h3 {
+    @include theme.title1();
+    text-align: center;
+  }
+  p {
+    @include theme.body1();
+    text-align: center;
+  }
+
+  ul {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    li {
+      list-style: none;
+      position: relative;
+      padding-left: 1.4rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0.35rem auto auto 0;
+        display: block;
+        $size: 0.8rem !important;
+        width: $size;
+        height: $size;
+
+
+        background-color: var.$like-color;
+        @include theme.radius('max');
+        @include theme.ratio('square');
+      }
+
+      &.unlocked {
+        &::before {
+          background-color: #198754;
+        }
+      }
+
+      p {
+        text-align: left;
+        @include theme.title2();
+        @include theme.text-color('primary');
+      }
+      span {
+        @include theme.body2();
+        @include theme.text-color('secondary');
+      }
+    }
+  }
+}

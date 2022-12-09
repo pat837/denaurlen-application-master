@@ -1,0 +1,39 @@
+@use './../../../styles/utils/mixins';
+@use './../../../styles/utils/variables' as var;
+
+.wrapper.wrapper {
+  margin: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 99999999999999999999;
+  pointer-events: none !important;
+
+  @media screen and (min-width: 1080px) {
+    bottom: 75vh !important;
+  }
+
+  & > div {
+    flex-grow: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    text-align: center;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    & > div {
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--toast-text) !important;
+
+      @include mixins.background-blur(var(--toast-bg));
+    }
+  }
+}

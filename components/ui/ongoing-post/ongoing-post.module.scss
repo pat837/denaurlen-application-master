@@ -1,0 +1,62 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  h5 {
+    @include theme.title2();
+    text-transform: capitalize;
+
+    span {
+      @include theme.text-color('accent');
+
+      position: relative;
+      transition: 0.2s all ease;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: auto 0 -0.3rem;
+
+        margin: auto;
+        display: block;
+        width: 0;
+        height: 0.16rem;
+        transition: 0.2s all ease;
+
+        @include theme.radius('max');
+        @include theme.bg-color('accent');
+      }
+
+      &.active {
+        @include theme.text-color('secondary');
+
+        &::before {
+          width: 36%;
+        }
+      }
+    }
+  }
+  a {
+    @include theme.body2;
+    @include theme.text-color('accent');
+    @include mixins.hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

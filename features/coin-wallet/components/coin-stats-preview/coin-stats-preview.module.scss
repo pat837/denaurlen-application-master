@@ -1,0 +1,122 @@
+@use '../../../../styles/utils/mixins';
+@use '../../../../styles/utils/variables' as var;
+@use '../../../../styles/utils/theme';
+
+.coin_stats_preview_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  @include mixins.min-width(1080px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  @include theme.radius('m');
+  padding: 1rem;
+  border: 2px solid map-get($map: var.$background-color, $key: 'wrapper');
+
+  .header {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      @include theme.title1;
+      @include theme.text-color('secondary');
+
+      display: flex;
+      align-items: center;
+      line-height: unset !important;
+      gap: 0.5rem;
+
+      &::before {
+        content: '';
+        width: 0.2rem;
+        height: 1.7rem;
+        display: inline-block;
+        background-color: map-get($map: var.$text-color, $key: 'disabled');
+        @include theme.radius('max');
+      }
+    }
+
+    .button {
+      @include mixins.min-width(720px) {
+        display: none;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 0.9rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .icon {
+        @include theme.radius('m');
+        $size: 2.7rem;
+        width: $size;
+        height: $size;
+        display: grid;
+        place-items: center;
+
+        svg {
+          $icon-size: calc($size - 1.2rem);
+          width: $icon-size;
+          height: $icon-size;
+          color: rgb(255 255 255 / 0.9);
+        }
+        &.dark {
+          svg {
+            color: rgb(0 0 0 / 0.74);
+          }
+        }
+      }
+
+      .progress {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.16rem;
+
+        & > span {
+          @include theme.title2;
+        }
+
+        .progress_bar {
+          position: relative;
+          width: 100%;
+          height: 0.5rem;
+          overflow: hidden;
+          @include theme.bg-color('wrapper');
+          @include theme.radius('max');
+
+          .bar {
+            position: absolute;
+            inset: 0 auto 0 0;
+            transition: all 0.25s linear;
+            @include theme.radius('max');
+          }
+        }
+      }
+
+      .value {
+        @include theme.title2();
+
+        &::after {
+          content: '%';
+          @include theme.title3;
+        }
+      }
+    }
+  }
+}

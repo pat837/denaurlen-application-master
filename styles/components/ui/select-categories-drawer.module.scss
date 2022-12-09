@@ -1,0 +1,121 @@
+@use './../../utils/mixins';
+@use './../../utils/theme';
+
+.drawer {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+.drawer_backdrop {
+  @include mixins.background-blur(rgba(0, 0, 0, 0.38), 18px);
+}
+
+$maxWidth: 500px;
+
+.wrapper {
+  padding: 32px 16px 16px;
+  width: 100%;
+  max-width: $maxWidth;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  background-color: transparent;
+  @media screen and (min-width: 500px) {
+    padding: 24px 24px 40px;
+    gap: 16px;
+  }
+}
+
+.category_wrapper {
+  position: relative;
+  border-radius: 10px !important;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0.1;
+  }
+  label {
+    @include theme.bg-color('surface');
+    @include theme.radius('m');
+    padding: 0.4rem 0.8rem;
+    padding-right: 0.1rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    gap: 8px;
+    cursor: pointer !important;
+    .img {
+      display: grid;
+      place-items: center;
+
+      svg {
+        $size: 2.4rem;
+        width: $size;
+        height: $size;
+      }
+    }
+    span {
+      display: flex;
+      align-items: center;
+      font-size: 12.6px;
+      @include theme.text-color('primary');
+    }
+  }
+  input:checked + label {
+    @include theme.bg-color('accent');
+    svg, span {
+      color: rgb(255 255 255 / 0.86) !important;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    label {
+      padding: 6px 12px;
+      gap: 1ch;
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.container {
+  position: relative;
+  @media screen and (min-width: $maxWidth) {
+    display: grid;
+    place-content: center;
+  }
+}
+
+.handle {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 4ch;
+  height: 6px;
+  border-radius: 10px;
+  @include theme.bg-color('surface');
+}
+.header {
+  padding: 8px 24px 18px;
+  width: 100%;
+  max-width: $maxWidth;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    @include theme.text-color('primary');
+  }
+
+  svg {
+    width: 24px;
+  }
+}

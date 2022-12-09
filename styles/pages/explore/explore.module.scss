@@ -1,0 +1,220 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.page {
+  position: relative;
+  isolation: isolate;
+
+  padding-top: 4.1rem;
+
+  @media only screen and (min-width: 1080px) {
+    padding-top: 0.3rem;
+  }
+}
+
+$gap: 0.3rem;
+$columns: 24;
+$grid-width: min(100vw, 900px);
+
+.posts_section {
+  @include mixins.bottom-entry;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: $gap;
+  
+  section {
+    width: $grid-width;
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    grid-auto-rows: calc($grid-width / $columns);
+    gap: $gap;
+
+    & > * {
+      @include theme.bg-color('surface');
+
+      position: relative;
+      width: 100% !important;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+
+      &:nth-child(3),
+      &:nth-child(4),
+      &:nth-child(6),
+      &:nth-child(7),
+      &:nth-child(9),
+      &:nth-child(10),
+      &:nth-child(11),
+      &:nth-child(12),
+      &:nth-child(13),
+      &:nth-child(14),
+      &:nth-child(16),
+      &:nth-child(17),
+      &:nth-child(19),
+      &:nth-child(20),
+      &:nth-child(21),
+      &:nth-child(22) {
+        grid-column: span 7;
+        grid-row: span 7;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(23),
+      &:nth-child(24) {
+        grid-column: span 12;
+        grid-row: span 14;
+      }
+
+      &:nth-child(18),
+      &:nth-child(25),
+      &:nth-child(26),
+      &:nth-child(27),
+      &:nth-child(28),
+      &:nth-child(29),
+      &:nth-child(30) {
+        grid-column: span 8;
+        grid-row: span 9;
+      }
+
+      &:nth-child(5),
+      &:nth-child(8),
+      &:nth-child(15),
+      &:nth-child(18) {
+        grid-column: span 10;
+        grid-row: span 14;
+      }
+    }
+
+    .blur {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      &.show {
+        @include mixins.background-blur(transparent, 1.6rem);
+      }
+    }
+
+    .net_worth {
+      position: absolute;
+      inset: 0.6rem 0.6rem auto auto;
+
+      padding: 0.3rem 0.8rem 0.3rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.7));
+
+      @include mixins.background-blur(rgba(255, 255, 255, 0.8), 1rem);
+      @include theme.text-color('primary');
+      @include theme.radius('max');
+      @include theme.label1();
+
+      svg {
+        width: 1.6rem;
+      }
+    }
+    .icon {
+      position: absolute;
+      inset: 0.6rem 0.6rem auto auto;
+
+      svg {
+        color: rgb(255, 255, 255);
+        width: 1.4rem;
+        filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.7));
+      }
+    }
+  }
+
+  .video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.view_page {
+  width: 100vw;
+  max-width: calc(50vh + 4rem);
+  grid-area: main;
+  display: grid;
+  grid-template-columns: min(calc(100vw - 3px), calc(50vh + 4rem));
+
+  @media only screen and (any-pointer: coarse) {
+    grid-template-columns: min(100vw, calc(50vh + 4rem));
+  }
+
+  @include mixins.bottom-entry;
+}
+.gap {
+  display: block;
+  height: 1rem !important;
+}
+
+.search_wrapper {
+  position: fixed;
+  inset: 0 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 2;
+
+  .fix {
+    height: var(--appbar-height);
+  }
+  .search_ {
+    padding: 0.8rem;
+
+    @include mixins.background-blur();
+
+    .btn {
+      width: 100% !important;
+      padding: 0.6rem 1rem !important;
+      justify-content: flex-start;
+
+      @include theme.bg-color('surface');
+      @include theme.body2;
+      @include theme.text-color('secondary');
+      @include theme.radius('m');
+    }
+  }
+}
+
+.view_page_wrapper {
+  $break-point: 1280px;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(100vw - 5px);
+  grid-template-areas: 'main';
+  gap: 0.74rem;
+
+  @media only screen and (any-pointer: coarse) {
+    grid-template-columns: 100vw;
+  }
+
+  @include mixins.min-width(1080px) {
+    grid-template-columns: calc(100vw - 110px - 3px);
+  }
+
+  @media only screen and (max-width: $break-point) {
+    place-items: center;
+  }
+  @include mixins.min-width($break-point) {
+    gap: 1.2rem;
+    grid-template-columns: auto calc(50vh + 4rem) 1.8rem 28rem auto;
+    grid-template-areas: '___ main _ side __';
+
+    aside {
+      position: relative;
+      display: block;
+      grid-area: side;
+    }
+  }
+}

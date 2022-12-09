@@ -1,0 +1,40 @@
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/mixins';
+
+.wrapper {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  isolation: isolate;
+
+  & > h1 {
+    @include mixins.heading1;
+  }
+  & > p {
+    @include theme.body2;
+  }
+
+  section {
+    width: 90vw;
+
+    h4 {
+      @include theme.title1;
+      @include theme.text-color('secondary');
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto auto;
+    display: block;
+    width: 50vw;
+    height: 40vh;
+    z-index: -1;
+
+    @include theme.bg-color('accent');
+  }
+}

@@ -1,0 +1,95 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.loader {
+  display: grid;
+  place-items: center;
+
+  span {
+    @include theme.body2();
+    @include theme.text-color('secondary');
+  }
+}
+
+.wrapper {
+  max-height: 80vh;
+  isolation: isolate;
+  .list {
+    display: flex;
+    flex-direction: column;
+
+    .list_item {
+      padding: 0.6rem 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .avatar {
+        --avatar-size: 3rem;
+      }
+
+      .avatar_wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+
+        p {
+          @include theme.title2;
+          @include theme.text-color('primary');
+        }
+        span {
+          @include theme.body3;
+          @include theme.text-color('secondary');
+        }
+      }
+    }
+  }
+}
+
+$height: 4rem;
+
+.share_bar {
+  position: fixed;
+  inset: auto 0 0;
+  height: $height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include theme.bg-color('surface');
+}
+
+.share_bar_fix {
+  height: calc($height * 1.25);
+}
+
+.input_field {
+  @include theme.bg-color('surface');
+  @include theme.radius('m');
+  grid-column: span 2;
+  display: flex;
+  overflow: hidden;
+
+  input {
+    $padding: 0.2rem;
+    flex: 1;
+    padding: $padding 0 $padding calc($padding * 4);
+    background: transparent;
+    outline: none;
+    border: none;
+    min-height: 40px;
+  }
+}
+
+.search_wrapper {
+  position: sticky;
+  inset: 0 0 auto;
+  z-index: 9;
+}

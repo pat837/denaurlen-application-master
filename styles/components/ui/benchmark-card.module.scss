@@ -1,0 +1,193 @@
+@use '../../utils/variables' as var;
+@use '../../utils/mixins';
+
+$aspect-ratio: map-get(
+  $map: var.$aspect-ratio,
+  $key: 'premium'
+) !important;
+$radius: map-get(
+  $map: var.$border-radius,
+  $key: 's'
+) !important;
+
+.card {
+  align-self: flex-end;
+  width: 100%;
+  aspect-ratio: $aspect-ratio;
+  border-radius: $radius;
+  overflow: hidden !important;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: $aspect-ratio;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 2;
+    @include mixins.background-blur(transparent, 1.2rem);
+  }
+  &.blur {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+.details {
+  // @include mixins.background-blur(transparent);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  background-image: linear-gradient(360deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+  z-index: 4;
+
+  svg {
+    margin-bottom: -10px;
+  }
+
+  span {
+    @include mixins.body1();
+
+    display: inline-block;
+    padding-bottom: 14px;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+.rank {
+  @include mixins.heading4;
+  padding: 4px 4px 4px 10px;
+  border-top-right-radius: $radius;
+  color: rgba(255, 255, 255, 0.94);
+  span {
+    @include mixins.heading5();
+    color: rgba(255, 255, 255, 0.94);
+  }
+}
+
+.first_card {
+  position: relative;
+  min-height: 320px;
+  display: grid;
+  grid-template-columns: 1fr !important;
+  grid-column: 1 / span 2;
+  border-radius: $radius;
+  overflow: hidden !important;
+  isolation: isolate;
+
+  & .rank {
+    margin: -6px -4px auto -10px;
+    z-index: 9;
+  }
+
+  .info {
+    padding: 14px;
+    position: relative;
+    width: 100%;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background-color: #242424;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    isolation: isolate;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        360deg,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.2)
+      );
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: all 0.2s ease;
+      @include mixins.background-blur(transparent, 1.2rem);
+    }
+    &.blur {
+      &::after {
+        opacity: 1;
+      }
+    }
+    .uploader {
+      z-index: 9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+
+      .avatar {
+        --avatar-size: 2.8rem;
+      }
+    }
+    .username {
+      @include mixins.body1();
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .coin_wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      .coins {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .highest_valuer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .labels {
+      width: 100%;
+      display: grid;
+      gap: 14px;
+      z-index: 4;
+
+      span {
+        @include mixins.caption();
+        color: rgb(255, 255, 255, 0.6);
+        text-align: left;
+      }
+      code {
+        @include mixins.subtitle1();
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.94);
+      }
+      p {
+        @include mixins.subtitle1();
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.94);
+      }
+    }
+  }
+}

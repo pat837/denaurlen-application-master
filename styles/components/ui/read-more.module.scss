@@ -1,0 +1,15 @@
+@use './../../utils/mixins';
+@use './../../utils/_variables.scss' as var;
+
+.button {
+  @include mixins.caption();
+  color: var.$accent-color;
+  cursor: pointer;
+  text-decoration: none;
+ 
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

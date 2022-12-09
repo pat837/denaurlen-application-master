@@ -1,0 +1,83 @@
+@use '../../../utils/variables' as var;
+@use '../../../utils/mixins' as mixin;
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  form {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    display: flex;
+    gap: 10px;
+
+    background-color: map-get($map: var.$background-color, $key: 'paper');
+
+    input {
+      @include mixin.body2;
+      padding: 8px 14px;
+      flex: 1;
+      outline: none !important;
+      border: 1px solid map-get($map: var.$text-color, $key: 'disabled');
+      border-radius: 100vmax;
+      background-color: map-get($map: var.$background-color, $key: 'paper')
+    }
+  }
+}
+
+.post_btn {
+  @include mixin.button;
+  font-weight: 500 !important;
+}
+
+.message {
+  height: 54px;
+  display: grid;
+  place-items: center;
+  p {
+    text-align: center;
+  }
+}
+
+.comment_card {
+  margin: 0;
+  width: 96% !important;
+  display: flex;
+  // align-items: center;
+
+  .comment_section {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+
+    .comment_wrapper {
+      display: grid;
+      gap: 0.5ch;
+    }
+    .username_wrapper {
+      display: flex;
+      align-items: center;
+
+      .username {
+        @include mixin.body1;
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+
+      time {
+        @include mixin.button;
+        color: map-get($map: var.$text-color, $key: 'disabled');
+      }
+    }
+
+    .comment {
+      @include mixin.body2;
+      color: map-get($map: var.$text-color, $key: 'primary');
+    }
+  }
+}

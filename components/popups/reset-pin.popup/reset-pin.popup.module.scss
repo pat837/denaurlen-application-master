@@ -1,0 +1,53 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/theme';
+
+.wrapper {
+  $max-width: 336px;
+  $padding: calc(calc(100% - $max-width) / 2);
+  padding-left: $padding;
+  width: 100%;
+  max-width: calc($max-width + $padding);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  h4 {
+    @include theme.title1;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.input_field {
+  @include theme.bg-color('surface');
+  @include theme.radius('m');
+  grid-column: span 2;
+  display: flex;
+  overflow: hidden;
+
+  input {
+    $padding: 0.2rem;
+    flex: 1;
+    padding: $padding 0 $padding calc($padding * 4);
+    background: transparent;
+    outline: none;
+    border: none;
+    min-height: 40px;
+  }
+}
+
+.button_group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}

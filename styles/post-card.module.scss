@@ -1,0 +1,245 @@
+// $likeColor: var(--accent-color);
+@use './utils/variables' as var;
+@use './utils/mixins';
+
+$likeColor: var.$like-color;
+
+.wrapper {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  height: fit-content !important;
+  background-color: map-get($map: var.$background-color, $key: 'card');
+  border-radius: 8px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    [data-user-wrapper] {
+      display: flex;
+      align-items: center;
+
+      [data-username] {
+        margin-left: 8px;
+        display: grid;
+        gap: 4px;
+
+        p {
+          @include mixins.body1;
+          font-style: normal;
+          line-height: 17px;
+          display: flex;
+          align-items: center;
+        }
+
+        span {
+          @include mixins.caption;
+          font-style: normal;
+          line-height: 15px;
+          display: flex;
+          align-items: center;
+          color: map-get($map: var.$text-color, $key: 'secondary');
+          width: 40vw;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          opacity: 0.75;
+        }
+      }
+    }
+
+    button {
+      svg {
+        color: #444;
+      }
+    }
+  }
+
+  .image_wrapper {
+    --ratio: 1 / 1;
+    position: relative;
+    cursor: pointer;
+    transition: 1.2s all;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: var(--ratio) !important;
+    border-radius: 10px !important;
+
+    .image {
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      user-select: none !important;
+      pointer-events: none !important;
+      border-radius: 14px;
+    }
+
+    .like_icon {
+      position: absolute;
+      color: $likeColor;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 5%;
+      opacity: 0;
+      transition: all 0.2s ease-in;
+    }
+    .interesting_icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 5%;
+      opacity: 0;
+      transition: all 0.2s ease-in;
+    }
+
+    .slot {
+      $borderRadius: 6px;
+      position: absolute;
+      top: 0;
+      right: 24px;
+      width: 44px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      background-color: map-get($map: var.$background-color, $key: 'surface');
+      border-bottom-right-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        opacity: 0.8;
+      }
+    }
+
+    .title {
+      $borderRadius: 10px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      padding: 10px;
+      display: grid;
+      place-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-bottom-left-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+
+      @include mixins.background-blur(rgba(38, 38, 38, 0.38), 60px);
+
+      span {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 18px;
+      }
+    }
+
+    .tags {
+      position: absolute;
+      left: 6px;
+      bottom: 6px;
+      background-color: rgba(0, 0, 0, 0.8) !important;
+      transform: scale(0.8);
+
+      svg path {
+        stroke: #fff !important;
+      }
+
+      @include mixins.background-blur(rgba(3, 3, 3, 0.7), 16px);
+    }
+
+    &.active_like {
+      .like_icon,
+      .interesting_icon {
+        opacity: 1;
+        width: 20%;
+      }
+    }
+  }
+
+  .caption {
+    margin: -2px 0 8px;
+    padding: 12px;
+    background-color: map-get($map: var.$background-color, $key: 'paper');
+    border-radius: map-get($map: var.$border-radius, $key: 's');
+
+    p {
+      @include mixins.body2;
+      color: map-get($map: var.$text-color, $key: 'secondary');
+      white-space: pre-line;
+      line-height: 18px;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    svg {
+      color: map-get($map: var.$text-color, $key: 'secondary');
+      width: 26px;
+    }
+
+    .like-section {
+      display: grid;
+      gap: 4px;
+
+      [data-btn] {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      a {
+        cursor: pointer;
+        line-height: 34px;
+      }
+
+      .liked {
+        svg {
+          color: $likeColor;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 490px) {
+    padding: 0;
+  }
+}
+
+.empty-post-card {
+  position: relative;
+  width: 100%;
+  height: auto;
+  color: map-get($map: var.$text-color, $key: 'disabled') !important;
+  background-color: map-get($map: var.$background-color, $key: 'surface') !important;
+
+  .priority {
+    position: absolute;
+    inset: 0 0.8rem auto auto;
+    width: 2.8rem;
+    aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'square');
+    display: grid;
+    place-items: center;
+
+    @include mixins.background-blur();
+    @include mixins.heading5;
+
+    color: map-get($map: var.$text-color, $key: 'primary');
+    $radius: map-get(
+      $map: var.$border-radius,
+      $key: 'm'
+    );
+
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+}

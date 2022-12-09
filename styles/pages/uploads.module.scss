@@ -1,0 +1,464 @@
+@use '../utils/variables' as var;
+@use '../utils/mixins';
+
+$bg-color: #000;
+$paper-color: lighten(
+  $color: $bg-color,
+  $amount: 6%
+);
+
+$surface-color: lighten(
+  $color: $bg-color,
+  $amount: 16%
+);
+
+.page_wrapper {
+  --padding: 14px;
+  width: 100%;
+  height: 100vh;
+  background-color: $paper-color;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  @media screen and (min-width: 450px) {
+    --padding: 24px;
+  }
+
+  @media screen and (min-width: 1080px) {
+    --padding: 36px;
+  }
+}
+
+.wrapper {
+  padding: var(--padding);
+  width: 100%;
+  height: 100vh;
+  overflow: auto !important;
+  background-color: $bg-color;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding);
+
+  @media screen and (min-width: 900px) {
+    flex-direction: row;
+
+    .image_preview_slider {
+      width: 116px;
+      height: 100%;
+
+      .image_preview_wrapper {
+        grid-template-columns: 110px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .image_preview_slider {
+      width: 136px;
+
+      .image_preview_wrapper {
+        grid-template-columns: 130px;
+      }
+    }
+  }
+}
+
+.image_preview {
+  position: relative;
+  flex: 1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.options {
+  position: absolute;
+  @include mixins.background-blur(rgba(38, 38, 38, 0.6));
+  svg {
+    width: 24px;
+    margin-right: 8px;
+  }
+  svg,
+  span {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  &,
+  & .option_btn {
+    border-radius: map-get($map: var.$border-radius, $key: 'max') !important;
+    overflow: hidden !important;
+  }
+  .option_btn {
+    padding: 8px 18px 8px 14px;
+  }
+}
+
+.option_wrapper {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  display: flex;
+  gap: 14px;
+
+  &,
+  & .option_btn {
+    border-radius: map-get($map: var.$border-radius, $key: 'max') !important;
+    overflow: hidden !important;
+  }
+  .option_btn {
+    padding: 8px 18px 8px 14px;
+    @include mixins.background-blur(rgba(38, 38, 38, 0.6));
+    svg {
+      width: 24px;
+      margin-right: 8px;
+    }
+    svg,
+    span {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .delete_btn {
+    aspect-ratio: 1 !important;
+    @include mixins.background-blur(rgba(38, 38, 38, 0.6));
+    svg {
+      width: 24px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+.crop {
+  top: 16px;
+  right: 0;
+  @media screen and (min-width: 900px) {
+    inset: 16px 50% auto auto;
+    transform: translateX(50%);
+  }
+}
+.next {
+  bottom: 16px;
+  right: 0;
+  .option_btn {
+    padding: 10px 22px;
+    span {
+      @include mixins.subtitle1();
+    }
+  }
+  @media screen and (min-width: 900px) {
+    inset: 16px 0 auto auto;
+    transform: translateX(0);
+  }
+}
+
+.image_preview_slider {
+  width: 100%;
+  height: 116px;
+  overflow: auto;
+  counter-reset: priority;
+
+  .image_preview_wrapper {
+    display: grid;
+    grid-template-columns: repeat(10, 110px);
+    gap: 6px;
+  }
+}
+
+.preview_img {
+  $radius: map-get($map: var.$border-radius, $key: 'm') !important;
+  position: relative;
+  cursor: pointer;
+
+  &,
+  & * {
+    border-radius: $radius;
+    transition: all 0.2s ease;
+  }
+  &::after {
+    position: absolute;
+    counter-increment: priority;
+    content: counter(priority);
+    inset: auto 0 0;
+    padding: 0.3rem;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    @include mixins.background-blur(rgba(38, 38, 38, 0.38));
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius; 
+    overflow: hidden !important;
+  }
+  &.current {
+    padding: 18px;
+  }
+}
+
+.add_more {
+  width: 100% !important;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'square') !important;
+  border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+  background-color: $surface-color !important;
+  svg {
+    color: rgb(133, 133, 133);
+    width: 48px !important;
+  }
+}
+
+.popup {
+  h5 {
+    @include mixins.heading5;
+    color: map-get($map: var.$text-color, $key: 'secondary');
+    text-align: center;
+  }
+
+  .button_wrapper {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    .file_type_button {
+      padding: 16px !important;
+      width: min(36vh, 180px);
+      flex-direction: column;
+      gap: 12px;
+      color: map-get($map: var.$text-color, $key: 'secondary');
+      background-color: map-get($map: var.$background-color, $key: 'surface') !important;
+      border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+
+      svg {
+        width: 52px;
+      }
+      span {
+        @include mixins.button();
+        color: inherit;
+      }
+    }
+  }
+}
+
+.crop_drawer {
+  --padding: 14px;
+  box-sizing: border-box;
+  padding: var(--padding) !important;
+  width: 100%;
+  height: 100vh;
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media screen and (min-width: 450px) {
+    --padding: 24px;
+  }
+  @media screen and (min-width: 1080px) {
+    --padding: 36px;
+  }
+}
+.crop-wrapper {
+  position: relative;
+  flex: 1;
+}
+.edit_controls_wrapper {
+  width: 100%;
+  overflow: auto;
+}
+
+.edit_row1_wrapper {
+  padding: 4px;
+  display: grid;
+  place-items: center;
+
+  svg {
+    color: rgb(199, 199, 199);
+  }
+  .disabled {
+    svg {
+      color: rgb(76, 76, 76) !important;
+    }
+  }
+}
+
+.edit_row1 {
+  width: min(80vw, 570px);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.edit_button_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .btn_edit {
+    @include mixins.body1();
+    padding: 10px 18px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: $surface-color !important;
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+  }
+}
+
+.upload_from_wrapper {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: map-get($map: var.$background-color, $key: 'paper');
+  overflow: hidden;
+}
+
+.upload_from {
+  padding: 14px;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: map-get($map: var.$background-color, $key: 'card');
+  overflow-y: auto;
+
+  @media screen and (min-width: 900px) {
+    padding: 24px;
+    height: 96vh;
+    border-radius: map-get($map: var.$border-radius, $key: 'l');
+  }
+}
+
+.suggestion_container {
+  width: 100%;
+  height: max-content !important;
+}
+
+.suggestion_wrapper {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  overflow-x: auto;
+  .suggestion {
+    padding: 0 16px 0 0;
+    @include mixins.body2();
+    background-color: map-get($map: var.$background-color, $key: 'surface');
+    border-radius: map-get($map: var.$border-radius, $key: 'max');
+  }
+}
+
+.title_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    @include mixins.heading5();
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+}
+
+.btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.image_preview_slider_f1 {
+  width: 100%;
+  height: 116px;
+}
+
+.image_preview_slider_f {
+  width: 100%;
+  height: 116px;
+  overflow-x: auto;
+
+  .image_preview_wrapper_f {
+    display: grid;
+    grid-template-columns: repeat(10, 110px);
+    grid-template-rows: 116px;
+    gap: 6px;
+  }
+  .preview_img {
+    &::after {
+      content: none;
+    }
+  }
+}
+
+.video_uploader_wrapper {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: map-get($map: var.$background-color, $key: 'paper');
+}
+
+.video_from {
+  width: 100%;
+  height: 100vh;
+  background-color: map-get($map: var.$background-color, $key: 'card');
+
+  @media screen and (min-width: 570px) {
+    max-width: 500px;
+    height: 96vh;
+    border-radius: map-get($map: var.$border-radius, $key: 'l');
+    box-shadow: var.$shadow;
+  }
+}
+
+.add_video_btn {
+  width: 100%;
+  height: 136px;
+  background-color: map-get($map: var.$background-color, $key: 'surface') !important;
+  border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+  overflow: hidden !important;
+
+  flex-direction: column;
+  gap: 18px;
+
+  svg,
+  span {
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+  .message {
+    @include mixins.body2();
+  }
+  svg {
+    width: 36px;
+  }
+}
+
+.progress_wrapper {
+  display: grid;
+  place-items: center;
+
+  .progress {
+    padding-bottom: 24px;
+    width: min(100%, 420px);
+    display: grid;
+    gap: 28px;
+
+    h4 {
+      @include mixins.heading5();
+      color: map-get($map: var.$text-color, $key: 'secondary');
+      text-align: center;
+    }
+  }
+}
+
+.crop_menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  svg {
+    color: #fff;
+    opacity: 0.6;
+  }
+}

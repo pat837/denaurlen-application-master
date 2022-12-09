@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use './../../../utils/variables' as var;
+
+.wrapper,
+.image {
+  width: 100%;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'premium') !important;
+  border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+  overflow: hidden !important;
+}
+.image {
+  background-color: map-get($map: var.$background-color, $key: 'surface') !important;
+} 

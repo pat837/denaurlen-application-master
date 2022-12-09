@@ -1,0 +1,41 @@
+@use '../../utils/variables' as var;
+@use '../../utils/mixins' as mix;
+
+.wrapper {
+  display: grid;
+  gap: 6px;
+
+  span {
+    @include mix.subtitle2;
+    font-style: normal;
+    line-height: 19px;
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+
+  h3 {
+    @include mix.heading4;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    color: map-get($map: var.$text-color, $key: 'primary');
+  }
+
+  p {
+    @include mix.caption;
+    display: flex;
+    align-items: baseline;
+    line-height: 17px;
+    color: map-get($map: var.$text-color, $key: 'secondary');
+
+    span {
+      @include mix.body1;
+      font-style: normal;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-transform: uppercase;
+
+      color: map-get($map: var.$text-color, $key: 'primary');
+    }
+  }
+}

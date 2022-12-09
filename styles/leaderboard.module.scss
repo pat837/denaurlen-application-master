@@ -1,0 +1,601 @@
+@use './utils/variables' as var;
+@use './utils/mixins';
+@use './utils/theme';
+
+.wrapper {
+  padding: var.$root-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  isolation: isolate;
+
+  .header {
+    padding-top: 4.8rem;
+    display: grid;
+    gap: 12px;
+
+    .filter {
+      display: inherit;
+      align-items: center;
+      gap: 2ch;
+
+      p {
+        display: none;
+        @media screen and (min-width: 720px) {
+          display: block;
+        }
+      }
+    }
+
+    .input_grp {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 2ch;
+      & > * {
+        flex: 1;
+      }
+
+      @media screen and (min-width: 530px) {
+        flex-direction: row;
+      }
+    }
+
+    @media screen and (min-width: 640px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+
+    li {
+      padding: 8px 16px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 120px 180px 1fr 1fr 80px;
+      &.hide_rank {
+        grid-template-columns: 120px 180px 1fr 1fr;
+      }
+      gap: 16px;
+      background-color: map-get($map: var.$background-color, $key: 'card');
+      border-radius: 8px;
+      @media (hover: hover) {
+        transition: all 0.2s ease;
+        box-shadow: var.$shadow;
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      [data-crown] {
+        display: grid;
+        place-items: center;
+      }
+
+      [data-rank] {
+        display: grid;
+        place-items: center;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 34px;
+        color: map-get($map: var.$text-color, $key: 'primary');
+      }
+
+      [data-flag] {
+        display: grid;
+        place-items: center;
+        svg {
+          width: 47px !important;
+        }
+      }
+
+      .profile_wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        & > div {
+          display: grid;
+          gap: 0.75ch;
+        }
+
+        [data-username] {
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 17px;
+          color: map-get($map: var.$text-color, $key: 'primary');
+        }
+
+        [data-name] {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: map-get($map: var.$text-color, $key: 'secondary');
+        }
+      }
+
+      .coins_wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+          margin-top: 8px;
+          width: 36px !important;
+          path {
+            transform: scale(1.05);
+          }
+        }
+
+        [data-coins] {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 29px;
+          color: map-get($map: var.$text-color, $key: 'secondary');
+        }
+      }
+
+      [data-coins] {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+
+      [data-indicator] {
+        display: grid;
+        place-items: center;
+        gap: 4px;
+        span {
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+
+      &:nth-of-type(1) {
+        padding: 10px 16px;
+        [data-flag] {
+          svg {
+            width: 60px !important;
+          }
+        }
+        .profile_wrapper {
+          [data-username],
+          [data-name] {
+            font-size: 18px;
+          }
+        }
+        .coins_wrapper {
+          svg {
+            margin-top: 4px;
+            width: 38px !important;
+            path {
+              transform: scale(1.12);
+            }
+          }
+
+          [data-coins] {
+            font-size: 32px;
+            line-height: 46px;
+          }
+        }
+      }
+      &:nth-of-type(2) {
+        padding: 12px 16px;
+        [data-flag] {
+          svg {
+            width: 56px !important;
+          }
+        }
+        .profile_wrapper {
+          [data-username],
+          [data-name] {
+            font-size: 18px;
+          }
+        }
+        .coins_wrapper {
+          svg {
+            margin-top: 4px;
+            width: 36px !important;
+            path {
+              transform: scale(1.09);
+            }
+          }
+
+          [data-coins] {
+            font-size: 30px;
+            line-height: 40px;
+          }
+        }
+      }
+      &:nth-of-type(3) {
+        padding: 10px 16px;
+        [data-flag] {
+          svg {
+            width: 52px !important;
+          }
+        }
+        .profile_wrapper {
+          [data-username],
+          [data-name] {
+            font-size: 16px;
+          }
+        }
+        .coins_wrapper {
+          svg {
+            margin-top: 4px;
+            width: 34px !important;
+            path {
+              transform: scale(1.07);
+            }
+          }
+
+          [data-coins] {
+            font-size: 28px;
+            line-height: 34px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .wrapper {
+    ul {
+      li {
+        grid-template-columns: 100px 160px 2fr 3fr 60px;
+        &.hide_rank {
+          grid-template-columns: 100px 160px 2fr 3fr;
+        }
+
+        &:nth-of-type(1) {
+          padding: 10px 16px;
+          [data-flag] {
+            svg {
+              width: 52px !important;
+            }
+          }
+          .profile_wrapper {
+            [data-username],
+            [data-name] {
+              font-size: 16px;
+            }
+          }
+          .coins_wrapper {
+            svg {
+              margin-top: 4px;
+              width: 34px !important;
+              path {
+                transform: scale(1.07);
+              }
+            }
+
+            [data-coins] {
+              font-size: 32px;
+              line-height: 34px;
+            }
+          }
+        }
+
+        &:nth-of-type(2) {
+          padding: 8px 12px;
+          [data-flag] {
+            svg {
+              width: 48px !important;
+            }
+          }
+          .profile_wrapper {
+            [data-username],
+            [data-name] {
+              font-size: 14px;
+            }
+          }
+          .coins_wrapper {
+            svg {
+              margin-top: 2px;
+              width: 32px !important;
+              path {
+                transform: scale(1.05);
+              }
+            }
+
+            [data-coins] {
+              font-size: 30px;
+              line-height: 32px;
+            }
+          }
+        }
+        & .self_rank,
+        &:nth-of-type(3) {
+          padding: 8px 12px;
+          [data-flag] {
+            svg {
+              width: 44px !important;
+            }
+          }
+          .profile_wrapper {
+            [data-username],
+            [data-name] {
+              font-size: 14px;
+            }
+          }
+          .coins_wrapper {
+            svg {
+              margin-top: 2px;
+              width: 32px !important;
+              path {
+                transform: scale(1.02);
+              }
+            }
+
+            [data-coins] {
+              font-size: 28px;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.card_wrapper {
+  padding: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  display: grid;
+  grid-template-columns: 1fr !important;
+
+  .card {
+    flex: 1;
+    all: unset;
+    display: grid;
+    grid-template-columns: 80px auto 36px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 12px;
+    background-color: map-get($map: var.$background-color, $key: 'wrapper');
+    border-radius: 8px;
+
+    @media only screen and (max-width: 496px) {
+      grid-template-columns: 46px auto 24px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      [data-profile-pic] {
+        position: relative;
+        [data-country-flag] {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          z-index: 9;
+        }
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        color: map-get($map: var.$text-color, $key: 'primary');
+        @include mixins.text-ellipsis(12ch);
+      }
+      [data-coins] {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 17px;
+        color: map-get($map: var.$text-color, $key: 'secondary');
+        svg {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    [data-crown] {
+      display: grid;
+      place-items: center;
+      svg {
+        max-width: 80px;
+        @media only screen and (max-width: 496px) {
+          width: 42px !important;
+        }
+      }
+    }
+
+    [data-indicator] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      svg {
+        width: 18px !important;
+      }
+    }
+  }
+}
+
+.self_rank {
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  li {
+    @include theme.bg-color('card');
+    border: 2px solid rgba(76, 0, 130, 0.2) !important;
+  }
+}
+
+.self_rank_ {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 999;
+
+  padding: 1rem 1.9rem calc(var(--appbar-height) + 0.7rem);
+
+  display: flex;
+  gap: 1.2rem;
+
+  .rank_ {
+    display: grid;
+    place-content: center;
+
+    @include theme.title1();
+
+    svg {
+      width: 3.2rem;
+    }
+  }
+
+  .profile_ {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    .avatar_wrapper {
+      position: relative;
+      padding-right: 0.6rem;
+
+      [data-country-flag] {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 9;
+      }
+    }
+
+    .avatar {
+      $size: 3.3rem;
+      width: $size;
+      height: $size;
+    }
+    .info {
+      p {
+        @include theme.body1;
+        padding-left: 0.3rem;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        @include theme.title2();
+
+        svg {
+          margin-bottom: -0.1rem;
+          width: 1.6rem;
+        }
+      }
+    }
+  }
+
+  .indicator_ {
+    display: grid;
+    place-items: center;
+
+    svg {
+      width: 1.6rem;
+    }
+  }
+
+  @include mixins.background-blur();
+  backdrop-filter: blur(1rem) !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.not_found {
+  height: 3rem;
+  display: grid;
+  place-items: center;
+
+  span {
+    @include theme.body1();
+  }
+}
+
+.navigation_wrapper {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 99;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  @include mixins.min-width(1080px) {
+    inset: 0 0 auto 110px;
+    box-shadow: none;
+  }
+
+  .navigation_section {
+    padding: 1.2rem;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    gap: 1.4rem;
+
+    @include mixins.background-blur();
+
+    & > input[type='radio'] {
+      display: none;
+    }
+
+    nav {
+      $width: 11ch;
+      $gap: 0.1rem;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, $width);
+      gap: $gap;
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: $width;
+        height: 100%;
+        z-index: 1;
+        transition: all 0.4s cubic-bezier(1, 0.01, 0, 1.01);
+        @include theme.radius('max');
+        @include theme.bg-color('surface');
+      }
+
+      label {
+        padding: 0.6rem;
+        display: grid;
+        place-items: center;
+        z-index: 2;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(1, 0.01, 0, 1.01);
+
+        @include mixins.body1();
+        @include theme.text-color('primary');
+        @include mixins.pulse-animation();
+      }
+
+      &.tab2 {
+        &::before {
+          transform: translateX(calc($width + $gap));
+        }
+      }
+      &.tab3 {
+        &::before {
+          transform: translateX(calc(2 * calc($width + $gap)));
+        }
+      }
+      &.tab1 {
+        &::before {
+          right: auto;
+          left: 0;
+        }
+      }
+    }
+  }
+}

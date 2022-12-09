@@ -1,0 +1,56 @@
+
+@use '../../utils/variables' as var;
+
+.wrapper {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25pc;
+  border: 2px solid ;
+  border-radius: 10px;
+  border: none;
+  border: 2px solid map-get($map: var.$background-color, $key: 'paper');
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+
+  h4 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+
+  svg > circle {
+    stroke: var.$accent-color !important;
+  }
+}
+
+.body,
+.body > div {
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  gap: 2ch;
+  & > div {
+    gap: 0.7ch;
+    p {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+
+      color: map-get($map: var.$text-color, $key: 'primary');
+    }
+  }
+}

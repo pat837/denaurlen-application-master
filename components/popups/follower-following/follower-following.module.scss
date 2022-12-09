@@ -1,0 +1,112 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.wrapper {
+  position: relative;
+  height: calc(100vh - var(--appbar-height) * 2.24);
+  overflow: auto;
+  isolation: isolate;
+
+  @include mixins.min-width(722px) {
+    height: 60vh;
+  }
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   inset: auto 0 calc(100% + 0.5rem);
+  //   margin: auto;
+  //   width: 3rem;
+  //   height: 0.4rem;
+  //   display: block;
+  //   background-color: aquamarine;
+  //   z-index: 99999999999999999999999;
+  // }
+
+  .title_section {
+    padding: 1.8rem 1rem;
+    display: grid;
+    place-items: center;
+
+    .count {
+      @include theme.title1();
+      @include theme.text-color('primary');
+    }
+    .title {
+      @include theme.body2();
+      @include theme.text-color('secondary');
+
+      text-transform: capitalize;
+    }
+  }
+}
+
+.container {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+}
+
+.nav_wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.navigation_section {
+  padding: 0.4rem;
+  padding-top: 1.2rem;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  gap: 1.4rem;
+
+  & > input[type='radio'] {
+    display: none;
+  }
+
+  nav {
+    $width: 14ch;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, $width);
+    gap: 1rem;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: $width;
+      height: 100%;
+      z-index: 1;
+      transition: all 0.4s cubic-bezier(1, 0.01, 0, 1.01);
+      @include theme.radius('max');
+      @include theme.bg-color('surface');
+    }
+
+    &.tab2 {
+      &::before {
+        transform: translateX(calc($width + 1rem));
+      }
+    }
+    &.tab1,
+    & {
+      &::before {
+        right: auto;
+        left: 0;
+      }
+    }
+
+    label {
+      padding: 0.6rem;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      cursor: pointer;
+
+      @include mixins.body1();
+      @include theme.text-color('primary');
+      @include mixins.pulse-animation();
+    }
+  }
+}

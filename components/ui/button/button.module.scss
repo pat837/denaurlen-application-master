@@ -1,0 +1,153 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+$padding-block: 0.7rem;
+$padding-inline: 1.4rem;
+
+.wrapper {
+  outline: none !important;
+  border: none !important;
+  isolation: isolate !important;
+
+  @include theme.body2;
+  @include theme.radius('max');
+
+  --color: #{map-get($map: var.$text-color, $key: 'button')};
+  --bg-color: transparent;
+
+  padding: $padding-block $padding-inline !important;
+  background-color: var(--bg-color) !important;
+
+  .label {
+    color: var(--color) !important;
+    text-transform: capitalize !important;
+    transition: all 0.15s ease !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    @include theme.body2();
+  }
+
+  &.filled {
+    &.primary,
+    &.default {
+      --bg-color: #{var.$accent-color};
+      .label {
+        color: var(--color) !important;
+      }
+    }
+    &.danger {
+      --bg-color: #{var.$like-color};
+    }
+  }
+
+  &.contained {
+    &.default,
+    &.primary,
+    &.danger {
+      --bg-color: #{map-get($map: var.$background-color, $key: 'surface')};
+      --color: #{map-get($map: var.$text-color, $key: 'primary')};
+      .label {
+        font-weight: 500 !important;
+        color: map-get($map: var.$text-color, $key: 'primary') !important;
+      }
+    }
+    &.danger {
+      --color: #{var.$like-color};
+      .label {
+        color: var.$like-color !important;
+      }
+    }
+  }
+  &.blur {
+    @include mixins.background-blur();
+    .label {
+      @include theme.text-color('primary');
+    }
+  }
+  &.outline {
+    border: 2px solid map-get($map: var.$background-color, $key: 'surface') !important;
+    padding: calc($padding-block - 2px) calc($padding-inline - 2px) !important;
+  }
+  &.outline,
+  &.text {
+    &.danger {
+      --color: #{var.$like-color};
+      .label {
+        color: var.$like-color !important;
+      }
+    }
+    &.default,
+    &.primary {
+      --color: #{var.$accent-color};
+      .label {
+        color: var.$accent-color !important;
+      }
+    }
+    &.no_padding {
+      padding: 0 !important;
+    }
+  }
+  .loader_wrapper {
+    position: absolute !important;
+    inset: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    transition: all 0.2s ease !important;
+    transition-delay: 00.15s !important;
+    opacity: 0 !important;
+  }
+  &.loading {
+    .label {
+      opacity: 0 !important;
+    }
+    .loader_wrapper {
+      opacity: 1 !important;
+    }
+  }
+
+  &.square {
+    @include theme.radius('s');
+  }
+
+  &:disabled {
+    opacity: 0.6 !important;
+  }
+}
+
+.spinner {
+  width: 1.2rem !important;
+
+  .path {
+    stroke: var(--color) !important;
+    stroke-linecap: round !important;
+    animation: dash_ 1.5s ease infinite !important;
+  }
+}
+
+.loading {
+  .spinner {
+    animation: rotate 2s linear infinite !important;
+  }
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash_ {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}

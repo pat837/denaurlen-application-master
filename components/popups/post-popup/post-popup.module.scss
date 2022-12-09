@@ -1,0 +1,33 @@
+@use '../../../styles/utils/mixins';
+
+.root {
+  @include mixins.background-blur(transparent, 1rem);
+  isolation: isolate;
+}
+.paper {
+  position: static !important;
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  display: grid;
+  place-items: center;
+  z-index: 99999;
+  transform: scale(0.85);
+
+  button {
+    @include mixins.background-blur();
+  }
+}
+
+.left {
+  left: 1.2rem;
+  right: auto;
+}
+.right {
+  right: 1.2rem;
+  left: auto;
+}

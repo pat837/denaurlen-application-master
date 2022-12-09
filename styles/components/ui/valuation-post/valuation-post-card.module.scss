@@ -1,0 +1,306 @@
+@use '../../../utils/mixins';
+@use '../../../utils/theme';
+@use '../../../utils/variables' as var;
+
+$card-radius: map-get(
+  $map: var.$border-radius,
+  $key: 'm'
+);
+$card-color: map-get(
+  $map: var.$background-color,
+  $key: 'card'
+);
+
+$padding: 1rem;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+
+  background-color: $card-color;
+
+  @media screen and (max-width: 490px) {
+    border-bottom: 1px solid map-get($map: var.$background-color, $key: 'surface');
+  }
+
+  @media screen and (min-width: 550px) {
+    box-shadow: var.$shadow;
+  }
+}
+
+.card_header {
+  $radius: $card-radius;
+  padding: 0.5rem calc($padding - 4px) 6px $padding;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: $card-color;
+
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+.profile_section {
+  display: flex;
+  align-items: center;
+  gap: 0.36rem;
+
+  p {
+    @include mixins.body1();
+    @include mixins.text-ellipsis(16ch);
+  }
+  span {
+    @include mixins.caption();
+    @include mixins.text-ellipsis(16ch);
+    @include theme.text-color('disabled');
+  }
+  @include mixins.max-width(360px) {
+    span,
+    p {
+      @include mixins.text-ellipsis(10ch);
+    }
+  }
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.gross_worth_wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    & > span {
+      @include mixins.subtitle1();
+      color: map-get($map: var.$text-color, $key: 'primary');
+    }
+  }
+  & > span {
+    @include mixins.caption();
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+}
+
+.post_wrapper {
+  --aspect-ratio: #{map-get($map: var.$aspect-ratio, $key: 'premium')};
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'premium');
+
+  background-color: map-get($map: var.$background-color, $key: 'wrapper');
+  overflow: hidden;
+  isolation: isolate;
+
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  &:focus {
+    outline: none !important;
+  }
+
+  .like_icon {
+    position: absolute;
+    color: var.$like-color;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 5%;
+    opacity: 0;
+    transition: all 0.2s ease-in;
+  }
+
+  &.active_like {
+    .like_icon {
+      opacity: 1;
+      width: 20%;
+    }
+  }
+
+  .cover {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: all 0.36s ease;
+    @include mixins.background-blur(rgb(0 0 0 / 0), 28px);
+    &.show {
+      opacity: 0;
+    }
+  }
+
+  .rank {
+    $padding: 0.6rem;
+    position: absolute;
+    top: $padding;
+    left: $padding * 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2;
+    color: rgb(255, 255, 255) !important;
+    transform: scale(1.7);
+    text-shadow: 1px 0px 1em rgb(0 0 0), 0px 0px 1.5em rgb(0 0 0), 0px 0px 2em rgb(0 0 0),
+      0px 0px 2.5em rgb(0 0 0), 0px 0px 8em rgb(0 0 0);
+    isolation: isolate;
+
+    @include theme.headline1();
+
+    &::before {
+      content: '#';
+      @include theme.body2();
+      padding-bottom: 0.3em;
+      color: rgb(255, 255, 255) !important;
+      opacity: 1 !important;
+      z-index: 2;
+    }
+  }
+}
+
+.post_footer {
+  $radius: $card-radius;
+  padding: 0.9rem $padding 0.8rem calc($padding + 4px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.86rem;
+  background-color: $card-color;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+.caption {
+  @include mixins.body2;
+  padding: 0.8rem $padding 0;
+  color: map-get($map: var.$text-color, $key: 'secondary');
+  white-space: pre-line;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+
+  a {
+    color: var.$accent-color;
+    text-decoration: none;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.footer_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    color: map-get($map: var.$text-color, $key: 'secondary') !important;
+  }
+}
+
+.like_comment_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post_details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    .count {
+      color: map-get($map: var.$text-color, $key: 'secondary');
+    }
+    @include mixins.body2();
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+
+  time {
+    @include mixins.caption();
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+}
+
+.lead_section {
+  margin: 0.8rem $padding 0;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: $card-radius;
+  background-color: map-get($map: var.$background-color, $key: 'surface');
+
+  .net_worth {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    span {
+      @include mixins.subtitle1();
+    }
+  }
+
+  .counts {
+    padding-left: 0.21em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    .views {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      svg {
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+      @include mixins.subtitle1();
+    }
+    .registered {
+      @include mixins.body1();
+      span {
+        @include mixins.subtitle1();
+      }
+    }
+  }
+  .lead_btn {
+    @include mixins.button;
+    color: map-get($map: var.$text-color, $key: 'button') !important;
+  }
+}
+
+.current_lead {
+  display: flex;
+  gap: 0.2rem;
+
+  .lead_name {
+    @include mixins.body2;
+    color: map-get($map: var.$text-color, $key: 'secondary') !important;
+    text-decoration: none;
+
+    span {
+      @include mixins.caption();
+      color: map-get($map: var.$text-color, $key: 'disabled');
+    }
+  }
+  .no_lead {
+    @include mixins.button();
+    color: map-get($map: var.$text-color, $key: 'disabled');
+  }
+}

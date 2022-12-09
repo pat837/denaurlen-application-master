@@ -1,0 +1,132 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include theme.bg-color('card');
+}
+
+.page_container {
+  width: 100%;
+  max-width: 38rem;
+}
+
+.page_wrapper {
+    @include mixins.bottom-entry;
+
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  h5 {
+    @include theme.title2;
+    @include theme.text-color('primary');
+
+    &:nth-of-type(2) {
+      margin-top: 1rem;
+    }
+  }
+}
+
+$bp: 480px;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.8rem;
+
+  @include mixins.min-width($bp) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card_wrapper {
+  @include theme.radius('m');
+  overflow: hidden !important;
+}
+.card {
+  @include theme.bg-color('wrapper');
+  @include theme.radius('m');
+
+  padding: 0.8rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 3.5rem;
+    @include theme.text-color('primary');
+  }
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3ch;
+
+    time {
+      @include theme.label3();
+      @include theme.text-color('secondary');
+    }
+  }
+  .name {
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
+
+    @include theme.title2();
+    @include theme.text-color('primary');
+  }
+
+  @include mixins.min-width($bp) {
+    flex-direction: column;
+    .info {
+      place-items: center;
+
+      .name {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  }
+}
+
+.popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  .popup_wrapper {
+    width: 100%;
+    max-width: 360px;
+    display: grid;
+    place-items: center;
+    gap: 0.8rem;
+
+    & > svg {
+      width: 5rem;
+    }
+    & > span {
+      @include theme.body2();
+    }
+
+    & > p {
+      @include theme.body1();
+    }
+
+    & > div {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+}

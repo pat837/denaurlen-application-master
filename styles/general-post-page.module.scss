@@ -1,0 +1,37 @@
+@use './utils/variables' as var;
+
+.page-wrapper {
+  position: relative;
+
+  padding: var.$root-padding;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.post-wrapper {
+  ---card-width: 6rem;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(6.4rem, 100%), 1fr));
+
+  & > * {
+    width: 100%;
+    aspect-ratio: 9 / 11 !important;
+    height: 100% !important;
+    border-radius: 8px !important;
+  }
+
+  @media only screen and (min-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(10rem, 100%), 1fr));
+  }
+  @media only screen and (min-width: 1400px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
+  }
+}
+
+.loader-wrapper {
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}

@@ -1,0 +1,72 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.loader {
+  height: 4rem;
+  display: grid;
+  place-items: center;
+}
+
+.list {
+  padding: 0.4rem 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+
+  @include theme.bg-color('wrapper');
+  @include theme.radius(m);
+  @include mixins.bottom-entry;
+}
+
+.list-item {
+  padding: 0.6rem 0.8rem !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  p {
+    flex: 1;
+    text-align: start;
+
+    @include theme.body2;
+    @include theme.text-color(secondary);
+
+    span {
+      padding-right: 0.2rem;
+      @include theme.body1;
+      @include theme.text-color(primary);
+    }
+
+    time {
+      @include theme.body3;
+      @include theme.text-color(secondary);
+    }
+  }
+
+  .post {
+    position: relative;
+    width: 3.8rem;
+    overflow: hidden;
+    @include theme.ratio('square');
+    @include theme.radius('s');
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 0.2rem;
+    height: 1.8rem;
+    transition: all 0.2s ease;
+
+    @include theme.bg-color('surface');
+    @include theme.radius('max');
+  }
+
+  &.new_list {
+    &::before {
+      @include theme.bg-color('danger');
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use './../../../styles/utils/variables' as var;
+
+.title {
+  min-height: 24vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.1rem;
+
+  h3 {
+    @include theme.display2;
+  }
+  p {
+    @include theme.body2;
+    @include theme.text-color('secondary');
+  }
+}
+
+.appbar {
+  position: sticky;
+  inset: 0 0 auto;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  z-index: 9;
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  @include theme.bg-color('card');
+
+  .options {
+    display: flex;
+    gap: 1ch;
+  }
+}

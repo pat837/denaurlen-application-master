@@ -1,0 +1,44 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+
+.page {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: 'posts';
+
+  .leaderboard {
+    display: none;
+  }
+
+  @media only screen and (min-width: 1080px) {
+    padding: 1rem;
+    grid-template-columns: auto calc(24rem - 4px);
+    grid-template-areas: 'posts leaderboard';
+
+    .leaderboard {
+      position: relative;
+      padding-top: 14px;
+      display: block;
+      grid-area: leaderboard;
+    }
+  }
+  @include mixins.min-width(1280px) {
+    gap: 1.2rem;
+    grid-template-columns: auto calc(50vh + 4rem) 1.8rem 26.4rem auto;
+    grid-template-areas: '___ posts _ leaderboard __';
+  }
+}
+
+.container {
+  grid-area: posts;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100vw;
+  max-width: calc(50vh + 4rem);
+  display: grid;
+  gap: 14px;
+}

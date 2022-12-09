@@ -1,0 +1,48 @@
+@use '../../utils/theme';
+@use '../../utils/mixins';
+@use '../../utils/variables' as var;
+
+.wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  h3 {
+    @include theme.text-color();
+  }
+  form {
+    padding-block: 0.5rem 0.75rem;
+  }
+  a {
+    text-decoration: none;
+    @include theme.text-color('accent');
+    @include mixins.hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.pin {
+  margin-block: 0.6rem 0.2rem;
+  padding: 0.8rem 1rem;
+  width: 20ch;
+
+  @include mixins.heading5();
+  text-align: center;
+  letter-spacing: 0.25em;
+
+  border: none;
+  outline: none;
+  background-color: map-get($map: var.$background-color, $key: 'surface');
+  border-radius: map-get($map: var.$border-radius, $key: 'max');
+
+  &::-webkit-input-placeholder,
+  &:-ms-input-placeholder,
+  &::placeholder {
+    @include mixins.body2();
+    line-height: 100%;
+    letter-spacing: 0.05em;
+  }
+}

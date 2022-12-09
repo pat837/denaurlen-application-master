@@ -1,0 +1,109 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper {
+  width: calc(100vw - 2.5rem);
+  max-width: 24rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+    'one one two two three three'
+    'four four four five five five';
+  gap: 0.8rem;
+
+  & > * {
+    &:nth-child(1) {
+      grid-area: one;
+    }
+    &:nth-child(2) {
+      grid-area: two;
+    }
+    &:nth-child(3) {
+      grid-area: three;
+    }
+    &:nth-child(4) {
+      grid-area: four;
+    }
+    &:nth-child(5) {
+      grid-area: five;
+    }
+
+    &:nth-child(-n + 3) {
+      padding: 1rem 0.6rem;
+      display: grid;
+      place-items: center;
+      gap: 0.8rem;
+
+      @include theme.bg-color('wrapper');
+      @include theme.radius('m');
+
+      svg {
+        width: 2.2rem;
+        @include theme.text-color('secondary');
+      }
+      span {
+        @include theme.body2;
+        @include theme.text-color('secondary');
+      }
+    }
+
+    &:nth-child(n + 4) {
+      padding: 0.8rem 0.6rem;
+      display: grid;
+      place-items: center;
+      gap: 0.8rem;
+
+      @include theme.bg-color('wrapper');
+      @include theme.radius('m');
+
+      span {
+        @include theme.body2;
+        @include theme.text-color('secondary');
+      }
+    }
+
+    &.danger {
+      svg,
+      span {
+        @include theme.text-color('danger');
+      }
+    }
+  }
+}
+
+.confirm_popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  .container {
+    width: calc(100vw - 2.4rem);
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+
+    h4 {
+      @include theme.headline3;
+      @include theme.text-color('primary');
+
+      span {
+        text-transform: capitalize;
+        @include theme.text-color('secondary');
+      }
+    }
+    p {
+      @include theme.text-color('secondary');
+      @include theme.body2;
+      margin-bottom: 1rem;
+    }
+  }
+}

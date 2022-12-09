@@ -1,0 +1,42 @@
+@use '../../../../styles/utils/variables' as var;
+@use '../../../../styles/utils/mixins';
+@use '../../../../styles/utils/theme';
+
+.wrapper {
+  position: fixed;
+  inset: auto 0 0 0 !important;
+  padding-bottom: 0.5rem;
+  display: grid;
+  place-items: center;
+  transition: padding 0.18s ease;
+  pointer-events: none;
+
+  &.float_bottom {
+    padding-bottom: calc(var(--appbar-height) + 0.8rem);
+  }
+
+  .menubar {
+    @include theme.bg-color('wrapper');
+    @include theme.radius('l');
+    padding: 0.32rem 0 0.32rem 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: all;
+
+    .divider {
+      margin-right: -0.2rem;
+      width: 0.16rem;
+      height: 1.6rem;
+      background-color: map-get($map: var.$text-color, $key: 'disabled');
+      opacity: 0.36;
+      @include theme.radius('max');
+    }
+  }
+}
+
+.bottom_menu_fix {
+  width: 100%;
+  height: 4.5rem;
+  @include theme.bg-color('card');
+}

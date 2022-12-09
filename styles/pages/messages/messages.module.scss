@@ -1,0 +1,119 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.paper {
+  $radius: map-get(
+    $map: var.$border-radius,
+    $key: 'm'
+  );
+  @include theme.bg-color('card');
+
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+.page_wrapper {
+  padding: 1rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include theme.bg-color('card');
+  @include mixins.bottom-entry;
+}
+
+.chat_card {
+  padding: 0.36rem !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  .avatar {
+    $size: 3.2rem;
+    width: $size;
+    height: $size;
+  }
+  .preview {
+    flex: 1;
+    display: grid;
+    text-align: left;
+
+    p {
+      @include theme.title2();
+      @include mixins.text-ellipsis(20ch);
+      @include theme.text-color('primary');
+    }
+
+    span {
+      @include mixins.text-ellipsis(16ch);
+      @include theme.text-color('primary');
+      @include theme.body2();
+    }
+  }
+  .coins {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    span {
+      @include theme.body2;
+    }
+    svg {
+      margin-bottom: -4px;
+    }
+  }
+
+  .time_wrapper {
+    padding-bottom: 0.3rem;
+    height: 100%;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+
+    span {
+      padding: 0.3rem 0.6rem;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.9);
+
+      @include mixins.caption();
+      @include theme.bg-color('accent');
+      @include theme.radius('max');
+    }
+
+    time {
+      @include theme.body3();
+      @include theme.text-color('disabled');
+    }
+  }
+}
+
+.fab {
+  position: fixed !important;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  transition: transform 0.2s ease !important;
+  transform: translateY(0);
+  overflow: hidden !important;
+  box-shadow: var.$shadow;
+
+  &.show_fab {
+    transform: translateY(-60px);
+  }
+
+  svg {
+    width: 24px;
+    color: rgba(255 255 255 / 90%);
+  }
+}
+
+.fab_overflow {
+  height: 3.6rem;
+}

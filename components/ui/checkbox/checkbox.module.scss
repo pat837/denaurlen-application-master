@@ -1,0 +1,38 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.wrapper {
+  input {
+    display: none;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    .checkbox {
+      width: 22px;
+      height: 22px;
+
+      display: grid;
+      place-items: center;
+
+      border: 2px solid map-get($map: var.$text-color, $key: 'disabled');
+      @include theme.radius('max');
+
+      transition: all 0.3s ease;
+      svg {
+        width: 16px;
+        stroke-width: 3px;
+        color: map-get($map: var.$background-color, $key: 'card');
+      }
+    }
+  }
+  input:checked + label .checkbox {
+    @include theme.bg-color('accent');
+    border-color: var.$accent-color;
+    svg {
+      color: rgb(255 255 255 / 0.86);
+    }
+  }
+}

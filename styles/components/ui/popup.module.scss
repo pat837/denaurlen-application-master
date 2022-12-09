@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use './../../utils/mixins' as utils;
+@use './../../utils/variables' as var;
+
+.drawer_root {
+  @include utils.background-blur(transparent, 16px);
+}
+
+.wrapper {
+  padding: 24px 18px 36px;
+  $border-radius: map-get(
+    $map: var.$border-radius,
+    $key: 'l'
+  );
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  &.page {
+    padding: 0;
+  }
+}

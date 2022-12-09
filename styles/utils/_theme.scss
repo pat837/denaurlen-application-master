@@ -1,0 +1,131 @@
+@use './variables' as var;
+
+// Typography
+
+//display
+@mixin display1 {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+@mixin display2 {
+  font-size: 2rem;
+  line-height: 2.75rem;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+@mixin display3 {
+  font-size: 1.75rem;
+  line-height: 2.5rem;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+//headline
+@mixin headline1 {
+  font-size: 1.75rem;
+  line-height: 2.5rem;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+@mixin headline2 {
+  font-size: 1.5rem;
+  letter-spacing: 0;
+  line-height: 2.25rem;
+  font-weight: 500;
+}
+@mixin headline3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 2.25rem;
+}
+// title
+@mixin title1 {
+  font-size: 1.375rem;
+  letter-spacing: 0;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+@mixin title2 {
+  font-size: 1rem;
+  letter-spacing: 0.15px;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+@mixin title3 {
+  font-size: 0.875rem;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+// label
+@mixin label1 {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+@mixin label2 {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  line-height: 1rem;
+}
+@mixin label3 {
+  font-size: 0.6875rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  line-height: 1rem;
+}
+// body
+@mixin body1 {
+  font-size: 1rem;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+@mixin body2 {
+  font-size: 0.875rem;
+  letter-spacing: 0.25px;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+@mixin body3 {
+  font-size: 0.75rem;
+  letter-spacing: 0.4px;
+  font-weight: 500;
+  line-height: 0.75rem;
+}
+
+@mixin text-color($type: 'primary') {
+  color: if(
+    $type == 'accent',
+    var.$accent-color,
+    if($type == 'danger', var.$like-color, map-get($map: var.$text-color, $key: $type))
+  ) !important;
+}
+
+@mixin bg-color($type: 'paper') {
+  background-color: if(
+    $type == 'accent',
+    var.$accent-color,
+    if(
+      $type == 'danger',
+      var.$like-color,
+      if(
+        $type == 'light-accent',
+        var.$light-accent-color,
+        map-get($map: var.$background-color, $key: $type)
+      )
+    )
+  ) !important;
+}
+
+@mixin ratio($ratio: 'square') {
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: $ratio) !important;
+}
+
+@mixin radius($type: 's') {
+  border-radius: map-get($map: var.$border-radius, $key: $type) !important;
+}

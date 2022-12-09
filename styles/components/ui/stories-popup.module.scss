@@ -1,0 +1,173 @@
+@use '../../utils/mixins';
+@use '../../utils/variables' as var;
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+
+  img {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
+.close_button {
+  position: absolute !important;
+  right: 16px;
+  top: 16px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  z-index: 9999;
+
+  @include mixins.background-blur(rgba(38, 38, 38, 0.38));
+
+  svg {
+    width: 24px !important;
+    color: #fff !important;
+  }
+
+  @media only screen and (min-width: 720px) {
+    right: 36px;
+  }
+}
+
+.caption_wrapper {
+  $borderRadius: 16px;
+  padding: 24px 16px 36px;
+  display: grid;
+  gap: 16px;
+  color: #fff;
+  background-color: transparent;
+  border-top-left-radius: $borderRadius;
+  border-top-right-radius: $borderRadius;
+
+  &.show {
+    background-color: rgba(0, 0, 0, 0.8);
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+      -webkit-backdrop-filter: blur(60px);
+      background-color: rgba(38, 38, 38, 0.38);
+      backdrop-filter: blur(60px);
+      color: #fff !important;
+    }
+  }
+}
+
+.caption {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  p {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+.message_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  & > * {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+.message {
+  font-size: 18px;
+  opacity: 0.9;
+  .coins_icon {
+    margin-bottom: -10px;
+  }
+}
+.caption_btn_wrapper {
+  margin-top: 2ch;
+  display: flex;
+  gap: 2ch;
+  justify-content: center;
+  .close_btn {
+    color: rgba(255, 255, 255, 0.89) !important;
+    border-color: rgba(229, 229, 229, 0.38) !important;
+  }
+  .accept_btn {
+    color: rgba(255, 255, 255, 0.89) !important;
+    background-color: rgba(229, 229, 229, 0.38) !important;
+  }
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.views {
+  padding: 8px 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: rgba(255, 255, 255, 0.89);
+  * {
+    color: rgba(255, 255, 255, 0.89);
+  }
+}
+
+.views,
+.option {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 99px !important;
+
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    -webkit-backdrop-filter: blur(60px) !important;
+    background-color: rgba(38, 38, 38, 0.38) !important;
+    backdrop-filter: blur(60px) !important;
+  }
+}
+
+.option {
+  svg {
+    color: #fff !important;
+  }
+}
+
+.premium_story_preview {
+  $border-radius: 16px;
+
+  padding: 24px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 14px;
+
+  text-align: center;
+
+  background-color: rgba(0, 0, 0, 0.9) !important;
+
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    -webkit-backdrop-filter: blur(60px) !important;
+    background-color: rgba(38, 38, 38, 0.38) !important;
+    backdrop-filter: blur(16px) !important;
+  }
+
+  h6 {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 4.4rem;
+    color: #fff;
+  }
+  p {
+    line-height: 1.4rem;
+    color: #fff !important;
+  }
+}
+
+.svg.svg {
+  color: #fff !important;
+}

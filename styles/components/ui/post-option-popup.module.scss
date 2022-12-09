@@ -1,0 +1,107 @@
+@use '../../utils/mixins';
+@use '../../utils/variables' as var;
+
+.popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  .wrapper {
+    width: 96vw;
+    max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'share share link link report report'
+      'mute mute mute follow follow follow';
+    gap: 1rem;
+  }
+}
+
+$padding: 0.8rem !important;
+$bg-color: map-get(
+  $map: var.$background-color,
+  $key: 'surface'
+) !important;
+$radius: map-get(
+  $map: var.$border-radius,
+  $key: 'm'
+) !important;
+
+.share,
+.link,
+.report,
+.edit {
+  padding: $padding;
+  width: 100%;
+  // aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'square');
+  display: grid !important;
+  place-items: center;
+  gap: 0.8em;
+
+  background-color: $bg-color;
+  border-radius: $radius;
+  overflow: hidden !important;
+
+  svg {
+    width: 2.2rem;
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+  span {
+    @include mixins.caption();
+    color: map-get($map: var.$text-color, $key: 'primary');
+  }
+}
+
+.mute,
+.follow {
+  @include mixins.body1;
+
+  padding: $padding;
+  width: 100%;
+
+  display: grid;
+  place-items: center;
+
+  color: map-get($map: var.$text-color, $key: 'primary') !important;
+
+  background-color: $bg-color;
+  border-radius: $radius;
+}
+
+.share {
+  grid-area: share;
+}
+.link {
+  grid-area: link;
+}
+
+.report {
+  grid-area: report;
+  svg,
+  span {
+    color: var.$like-color;
+  }
+}
+.edit {
+  grid-area: report;
+}
+.mute {
+  grid-area: mute;
+  &.span {
+    grid-column: span 6 !important;
+  }
+}
+.follow {
+  grid-area: follow;
+}
+
+
+.btn_grp  {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 380px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}

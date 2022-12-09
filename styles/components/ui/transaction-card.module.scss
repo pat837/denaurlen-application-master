@@ -1,0 +1,109 @@
+@use './../../utils/variables' as var;
+@use './../../utils/theme';
+@use './../../utils/mixins';
+
+.wrapper {
+  position: relative;
+
+  .description {
+    padding: 0 0.2rem 0 4.4rem;
+    transition: all 0.2s linear;
+
+    p {
+      @include theme.body2;
+      @include theme.text-color('secondary');
+
+      position: relative;
+      padding-top: 0.6rem;
+      height: 1.88rem;
+
+      &::before {
+        position: absolute;
+        inset: 0 0 auto;
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: map-get($map: var.$text-color, $key: 'disabled');
+        opacity: 0.2;
+      }
+    }
+
+    &.hide {
+      padding: 0;
+      opacity: 0;
+      p {
+        padding-top: 0;
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.card {
+  padding-block: 0.8rem 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .icon {
+    $size: 3.4rem !important;
+    width: $size;
+    height: $size;
+
+    display: grid;
+    place-items: center;
+
+    @include theme.radius('max');
+    @include theme.ratio('square');
+    @include theme.bg-color('wrapper');
+
+    svg {
+      @include theme.text-color('primary');
+    }
+  }
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .account {
+      span {
+        @include theme.body1();
+        @include theme.text-color('primary');
+
+        &::before {
+          @include theme.body2();
+          @include theme.text-color('disabled');
+
+          content: attr(data-type) ' ';
+        }
+      }
+    }
+
+    time {
+      @include theme.body3();
+      @include theme.text-color('secondary');
+    }
+  }
+
+  code {
+    padding-right: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6ch;
+    @include theme.title2();
+    @include theme.text-color('secondary');
+    span {
+      @include theme.title1();
+      color: #1dba80 !important;
+      transform: scale(1.2);
+
+      &.debit {
+        color: #e74c3c !important;
+      }
+    }
+  }
+}

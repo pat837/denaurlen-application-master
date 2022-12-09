@@ -1,0 +1,12 @@
+@use '../utils/variables' as var;
+// @forward '../utils/variables';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: var.$accent-color;
+
+  h2 {
+    color: map-get($map: var.$text-color, $key: 'secondary');
+  }
+}

@@ -1,0 +1,24 @@
+.wrapper {
+  padding: 0;
+  height: 0;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition-delay: 0.2s;
+  transition: all 0.36s ease;
+
+  .field {
+    background-color: rgb(255, 255, 255);
+  }
+
+  .x {
+    svg {
+      width: 24px;
+    }
+  }
+
+  &.show {
+    padding: 12px 24px 0px;
+    height: min-content;
+    transform: scaleY(1);
+  }
+}

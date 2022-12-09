@@ -1,0 +1,102 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.wrapper {
+  padding-block: 1.2rem;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.post_wrapper {
+  width: 100vw;
+  max-width: calc(50vh + 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/// valuation view page
+
+.valuation_view {
+  isolation: isolate;
+
+  .fix {
+    height: calc(var(--appbar-height) + 0.2rem);
+  }
+
+  .navigation_wrapper {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 99;
+
+    .navigation_section {
+      @include mixins.background-blur();
+
+      padding: 1.2rem;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      gap: 1.4rem;
+
+      & > input[type='radio'] {
+        display: none;
+      }
+
+      nav {
+        $width: 16ch;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, $width);
+        gap: 1rem;
+
+        &::before {
+          position: absolute;
+          content: '';
+          width: $width;
+          height: 100%;
+          z-index: 1;
+          transition: all 0.4s cubic-bezier(1, 0.01, 0, 1.01);
+          @include theme.radius('max');
+          @include theme.bg-color('surface');
+        }
+
+        &.tab2 {
+          &::before {
+            transform: translateX(calc($width + 1rem));
+          }
+        }
+        &.tab1,
+        & {
+          &::before {
+            right: auto;
+            left: 0;
+          }
+        }
+
+        label {
+          padding: 0.6rem;
+          display: grid;
+          place-items: center;
+          z-index: 2;
+          cursor: pointer;
+
+          @include mixins.body1();
+          @include theme.text-color('primary');
+          @include mixins.pulse-animation();
+        }
+      }
+    }
+
+    @include mixins.min-width(1080px) {
+      inset: 0 0 auto 110px;
+    }
+  }
+}

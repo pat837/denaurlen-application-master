@@ -1,0 +1,99 @@
+@use './../utils/theme';
+@use './../utils/mixins';
+
+.wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(100vw - 3px);
+  grid-template-areas:
+    'story'
+    'main';
+  gap: 0.74rem;
+
+  @media only screen and (any-pointer: coarse) {
+    grid-template-columns: 100vw;
+  }
+
+  .story_wrapper {
+    grid-area: story;
+    // background-color: aqua;
+    overflow: auto;
+    padding: 0 1rem;
+    @include theme.bg-color('card');
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    @include mixins.min-width('1080px') {
+      @include theme.radius('m');
+    }
+  }
+  .feed_container {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mixins.bottom-entry;
+  }
+  aside {
+    display: none;
+  }
+  @media only screen and (min-width: 1080px) {
+    padding: 1rem;
+    grid-template-columns: auto calc(24rem - 4px);
+    grid-template-areas:
+      'story story'
+      'main side';
+
+    aside {
+      position: relative;
+      display: block;
+      grid-area: side;
+    }
+  }
+  @include mixins.min-width(1280px) {
+    gap: 1.2rem;
+    grid-template-columns: auto calc(50vh + 4rem) 1.8rem 26.4rem auto;
+    grid-template-areas:
+      'story story story story story'
+      '___ main _ side __';
+  }
+}
+
+.feed_wrapper {
+  padding-bottom: 1rem;
+  width: 100%;
+  max-width: calc(50vh + 4rem);
+  display: flex;
+  flex-direction: column;
+
+  .gap {
+    height: 1.2rem;
+  }
+}
+
+.refresh_btn {
+  position: fixed;
+  inset: calc(var(--appbar-height) + 0.5rem) 30% auto;
+  margin: auto;
+
+  display: grid;
+  place-items: center;
+  z-index: 999;
+  pointer-events: none;
+  transition: all 0.2s ease;
+
+  button {
+    pointer-events: all;
+  }
+
+  &.hide {
+    opacity: 0;
+    button {
+      pointer-events: none;
+    }
+  }
+}

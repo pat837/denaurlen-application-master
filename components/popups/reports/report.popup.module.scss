@@ -1,0 +1,53 @@
+@use '../../../styles/utils/theme';
+
+.popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  h4 {
+    @include theme.headline2;
+  }
+
+  h6 {
+    @include theme.title2;
+    @include theme.text-color('secondary');
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1rem
+  }
+
+  .list {
+    @include theme.bg-color('wrapper');
+    @include theme.radius('m');
+
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    li {
+      display: flex;
+      & > * {
+        width: 100% !important;
+        flex: 1 !important;
+        justify-content: flex-start;
+        padding: 0.6rem;
+
+        @include theme.body1;
+        @include theme.text-color('primary')
+      }
+    }
+  }
+}
+
+.confirmation {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  p {
+    padding: 0.6rem 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,120 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables.scss' as var;
+
+.container {
+  width: 100%;
+  overflow: hidden !important;
+
+  display: inline-block;
+
+  @include theme.bg-color('card');
+  @include theme.radius('m');
+
+  box-shadow: var.$shadow;
+
+  h6 {
+    padding: 1rem 0 0 1rem;
+    @include mixins.subtitle2();
+  }
+
+  @include mixins.max-width(540px) {
+    width: calc(100vw - 2px);
+    box-shadow: none !important;
+  }
+}
+
+.w {
+  --columns: 1;
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), min-content);
+  overflow: auto;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.suggestion_card {
+  position: relative;
+  margin-right: 1rem;
+  padding: 0.5rem 0.5rem 0.8rem;
+
+  width: 12rem;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  @include theme.radius('m');
+  @include theme.bg-color('wrapper');
+
+  .avatar {
+    --avatar-size: 5.2rem;
+  }
+
+  .name_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    p {
+      @include mixins.subtitle1();
+      @include theme.text-color('primary');
+    }
+    span {
+      text-align: center;
+      @include mixins.body2();
+      @include theme.text-color('secondary');
+      @include mixins.text-ellipsis(10rem);
+    }
+  }
+
+  .close_btn {
+    position: absolute;
+    inset: 0.1rem 0.1rem auto auto;
+
+    svg {
+      width: 16px;
+    }
+  }
+
+  &.fade,
+  &.fade * {
+    animation: fade_out 1s ease 0s 1 normal forwards;
+  }
+  &.hide {
+    display: none !important;
+  }
+}
+
+.ref_wrapper {
+  &:nth-last-child(1) {
+    .suggestion_card {
+      margin-right: 0;
+    }
+  }
+}
+
+@keyframes fade_out {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  90% {
+    width: 0;
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100);
+  }
+}

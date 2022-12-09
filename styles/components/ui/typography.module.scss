@@ -1,0 +1,47 @@
+@use '../../utils/theme';
+
+.display1 {
+  @include theme.display1();
+}
+.display2 {
+  @include theme.display2();
+}
+.display3 {
+  @include theme.display3();
+}
+.headline1 {
+  @include theme.headline1();
+}
+.headline2 {
+  @include theme.headline2();
+}
+.headline3 {
+  @include theme.headline3();
+}
+.title1 {
+  @include theme.title1();
+}
+.title2 {
+  @include theme.title2();
+}
+.title3 {
+  @include theme.title3();
+}
+.label1 {
+  @include theme.label1();
+}
+.label2 {
+  @include theme.label2();
+}
+.label3 {
+  @include theme.label3();
+}
+.body1 {
+  @include theme.body1();
+}
+.body2 {
+  @include theme.body2();
+}
+.body3 {
+  @include theme.body3();
+}

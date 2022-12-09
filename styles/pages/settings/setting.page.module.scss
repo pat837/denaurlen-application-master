@@ -1,0 +1,152 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.page {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @include theme.bg-color('card');
+}
+
+.wrapper {
+  padding: 1.4rem;
+  width: min(98vw, 900px);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  @include theme.bg-color('card');
+
+  .beta_note {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 0.5rem;
+    border: 2px solid map-get($map: var.$background-color, $key: 'surface');
+    padding: 0.75rem 0.68rem !important;
+
+    @include theme.radius('m');
+    @include theme.bg-color('wrapper');
+
+    svg,
+    p {
+      @include theme.text-color('secondary');
+    }
+
+    p {
+      @include theme.body3();
+    }
+  }
+
+  & > ul {
+    @include mixins.bottom-entry();
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    & > li {
+      display: block;
+      overflow: hidden;
+
+      @include theme.bg-color('wrapper');
+      @include theme.radius('m');
+
+      ul {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          display: flex;
+          flex-direction: column;
+
+          .list_item {
+            padding: 0.75rem 0.5rem 0.75rem 1rem;
+            width: 100% !important;
+            display: flex;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 0.75rem;
+            svg {
+              @include theme.text-color('secondary');
+            }
+            span {
+              flex: 1;
+              text-align: start;
+              @include theme.body2();
+            }
+
+            &.danger {
+              svg {
+                color: var.$like-color !important;
+              }
+              span {
+                color: var.$like-color;
+              }
+            }
+            .note {
+              @include theme.text-color('secondary');
+              @include theme.body2();
+              margin-top: -0.6rem;
+              padding-left: calc(0.75rem + 24px);
+              padding-right: 0.3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.referral_count {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 0.5rem;
+  & > span {
+    @include theme.radius('max');
+    @include theme.body2;
+    display: block;
+    padding: 0.2rem 0.6rem;
+    background-color: var.$like-color;
+    color: rgb(255 255 255 / 0.8);
+    line-height: unset !important;
+  }
+}
+
+.accordion {
+  @include theme.bg-color('wrapper');
+  background-image: none !important;
+
+  .summary {
+    padding-block: 0 !important;
+    padding-left: 0 !important;
+    & > * {
+      margin: 0 !important;
+    }
+  }
+  .details {
+    padding-top: 0 !important;
+    padding-bottom: 0.3rem !important;
+  }
+}
+.links_list {
+  display: flex;
+  flex-direction: column;
+  li {
+    & > * {
+      padding: 0.5rem 0.5rem 0.7rem 2.4rem !important;
+      display: flex !important;
+      justify-content: flex-start;
+    }
+    a {
+      @include theme.body2;
+      @include theme.text-color('secondary');
+    }
+  }
+}

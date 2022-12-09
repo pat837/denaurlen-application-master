@@ -1,0 +1,165 @@
+@use './../../utils/variables' as var;
+@use './../../utils/mixins' as mix;
+
+$borderRadius: 16px;
+$bg-color: map-get($map: var.$background-color, $key: 'paper');
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+  overflow: hidden;
+}
+.container {
+  position: relative;
+  padding: 16px;
+  width: min(500px, 100%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.heading {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  background-color: $bg-color;
+  border-radius: $borderRadius;
+
+  h5 {
+    padding-block: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+}
+
+.story {
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: 60px auto;
+  gap: 18px;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+
+  .img {
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      span {
+        font-size: 14px;
+        font-weight: 600;
+        opacity: 0.75;
+      }
+      p {
+        margin-top: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.no-views,
+.views {
+  position: relative;
+  display: grid;
+  background-color: $bg-color;
+  border-radius: $borderRadius;
+  flex: 1;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.views_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+
+  & > * {
+    border-radius: 8px !important;
+  }
+}
+
+.no-views {
+  place-items: center;
+  .info {
+    display: grid;
+    place-items: center;
+    gap: 18px;
+
+    svg {
+      width: 86px;
+      color: rgb(126, 126, 126);
+    }
+
+    p {
+      font-size: 18px;
+    }
+  }
+}
+
+.title {
+  position: fixed;
+  padding-top: 16px;
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $bg-color;
+  z-index: 9;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .close-button > svg {
+    width: 24px;
+  }
+
+  @media screen and (min-width: 500px) {
+    margin: auto;
+    bottom: 28px;
+    left: 0;
+    right: 0;
+    width: min(calc(500px - 28px * 2), 100%);
+  }
+}
+
+
+.person {
+  padding-right: 8px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+
+}
+
+.registered {
+  @include mix.caption;
+  display: block;
+  color: map-get($map: var.$text-color, $key: 'secondary');
+  text-align: right;
+}

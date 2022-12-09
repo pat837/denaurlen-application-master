@@ -1,0 +1,169 @@
+@use '../utils/mixins';
+@use '../utils/theme';
+@use '../utils/variables' as var;
+
+.page {
+  padding: 1.2rem;
+  padding-top: 78px;
+  min-height: calc(100vh - var.$appbar-height * 2);
+  isolation: isolate;
+  @include theme.bg-color('card');
+  @include mixins.min-width(1080px) {
+    min-height: calc(100vh - var.$appbar-height - 1.4rem);
+  }
+}
+
+.search_section {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 99;
+  @include mixins.background-blur();
+
+  .fix {
+    height: var(--appbar-height);
+  }
+
+  @include mixins.min-width(1080px) {
+    inset: 0 0 auto 110px;
+  }
+}
+
+.search_wrapper {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+
+  .input_wrapper {
+    position: relative;
+
+    .clear_wrapper {
+      position: absolute;
+      inset: 0 0 0 auto;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transform: scale(0);
+      transition: all 0.2s ease;
+
+      @include theme.text-color('secondary');
+      @include theme.ratio('square');
+
+      &.show {
+        transform: scale(1);
+      }
+    }
+  }
+
+  input {
+    padding: 0.6rem 2.2rem 0.6rem 1rem;
+    width: 100%;
+
+    border: none;
+    outline: none;
+    overflow: hidden;
+
+    @include theme.body2();
+    @include theme.text-color('primary');
+    @include theme.radius('m');
+    @include theme.bg-color('surface');
+  }
+}
+
+.profile_section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+
+  .profile_card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .profile_pic {
+      --avatar-size: 3.2rem;
+    }
+    .name_section {
+      flex: 1;
+      display: grid;
+      & > *:first-child {
+        @include theme.title2();
+        @include theme.text-color('primary');
+      }
+      & > *:last-child {
+        @include theme.body2();
+        @include theme.text-color('secondary');
+      }
+    }
+  }
+}
+
+.share_popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  gap: 0.3rem;
+
+  .avatar {
+    --avatar-size: 4rem;
+  }
+
+  .username {
+    @include theme.title2();
+    @include theme.text-color('primary');
+  }
+  .name {
+    @include theme.body2();
+    @include theme.text-color('secondary');
+  }
+  .coins {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    min-width: 12ch;
+    max-width: 80vw;
+    text-align: center;
+    border: none;
+    outline: none;
+    @include theme.bg-color('wrapper');
+    @include theme.radius('m');
+    &::placeholder {
+      @include theme.title1;
+      @include theme.text-color('secondary');
+    }
+
+    @include theme.title1;
+    @include theme.text-color('primary');
+  }
+  .note {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    min-width: 24ch;
+    max-width: 80vw;
+    outline: none;
+    border: none;
+
+    @include theme.bg-color('surface');
+    @include theme.radius('m');
+    @include theme.body1;
+    @include theme.text-color('primary');
+    &::placeholder {
+      text-align: center;
+      @include theme.body1;
+      @include theme.text-color('secondary');
+    }
+  }
+
+  .amount_wrapper {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.8rem;
+  }
+}
+.message {
+  height: 2rem;
+  display: grid;
+  place-items: center;
+
+  @include theme.text-color('secondary');
+  @include theme.body2;
+}

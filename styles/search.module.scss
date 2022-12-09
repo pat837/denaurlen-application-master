@@ -1,0 +1,101 @@
+@use './utils/theme';
+
+.popup-wrapper {
+  [data-x] svg {
+    width: 24px !important;
+  }
+
+  input {
+    font-size: 18px !important;
+  }
+
+  [data-search-result] {
+    padding-top: 14px;
+    width: 500px;
+    min-height: 36vh;
+    max-height: 60vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .user-wrapper {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: min-content !important;
+    border-radius: 6px;
+
+    [data-profile] {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .username-wrapper {
+        margin-left: 10px;
+        display: grid;
+        text-align: left;
+        gap: 4px;
+
+        p,
+        span {
+          font-weight: 600;
+          font-size: 15px;
+          @include theme.text-color('primary');
+        }
+
+        span {
+          font-weight: 500;
+          @include theme.text-color('secondary');
+        }
+      }
+    }
+
+    [data-coins] {
+      display: flex;
+      align-items: center;
+      padding: 6px 16px;
+      border-radius: 99px;
+      @include theme.bg-color('surface');
+      svg {
+        margin-top: 4px;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        @include theme.text-color('secondary');
+      }
+    }
+  }
+
+  .load-more {
+    height: 50px !important;
+    display: grid;
+    place-items: center;
+  }
+}
+
+.recent_search_title {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h6 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--accent-color);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

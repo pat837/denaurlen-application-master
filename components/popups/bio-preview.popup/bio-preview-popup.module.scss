@@ -1,0 +1,31 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.wrapper {
+  height: min-content !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 16 / 12;
+  background-position: center center;
+  background-size: cover;
+
+  .image {
+    @include theme.radius('m');
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  h6 {
+    padding-block: 0.8rem 0.25rem;
+    @include theme.headline2;
+    @include theme.text-color('primary');
+  }
+  p {
+    @include theme.text-color('secondary');
+    @include theme.body1;
+  }
+}

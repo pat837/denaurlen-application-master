@@ -1,0 +1,116 @@
+@use './variables' as var;
+
+@mixin background-blur($color: map-get($map: var.$background-color, $key: 'blur'), $blur: 1.2rem) {
+  background-color: $color !important;
+  -webkit-backdrop-filter: blur($blur) !important;
+  backdrop-filter: blur($blur) !important;
+}
+
+@mixin pulse-animation {
+  &,
+  & * {
+    transform: scale(1);
+    transition: all 0.3s ease;
+    &:active,
+    & *:active {
+      transform: scale(0.75);
+    }
+  }
+}
+
+@mixin heading1 {
+  font-size: 6rem !important;
+  font-weight: 300 !important;
+}
+@mixin heading2 {
+  font-size: 3.75rem !important;
+  font-weight: 300 !important;
+}
+@mixin heading3 {
+  font-size: 3.75rem !important;
+  font-weight: 500 !important;
+}
+@mixin heading4 {
+  font-size: 3rem !important;
+  font-weight: 500 !important;
+}
+@mixin heading5 {
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+}
+@mixin heading6 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+}
+
+@mixin subtitle1 {
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+}
+@mixin subtitle2 {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+}
+
+@mixin body1 {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+@mixin body2 {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+@mixin button {
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+}
+
+@mixin caption {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+}
+
+@mixin text-ellipsis($width: 8ch) {
+  max-width: $width;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin min-width($width) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin max-width($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin bottom-entry {
+  animation: bottom_entry 0.6s ease 0s 1 normal forwards;
+}
+
+@keyframes bottom_entry {
+  0% {
+    opacity: 0;
+    transform: translateY(3.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

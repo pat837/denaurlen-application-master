@@ -1,0 +1,39 @@
+.dialog {
+  margin: 24px;
+  max-width: 500px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  gap: 24px;
+
+  svg {
+    width: 100%;
+    max-width: 270px;
+  }
+
+  h4 {
+    font-family: var(--font-primary);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #343434;
+  }
+
+  p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #9D9D9D;
+  }
+}
+.drawer-wrapper {
+  $borderRadius: 16px;
+  border-radius: $borderRadius $borderRadius 0 0;
+}
+.drawer {
+  display: grid;
+  place-items: center;
+}

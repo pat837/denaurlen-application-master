@@ -1,0 +1,144 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.paper {
+  $radius: map-get(
+    $map: var.$border-radius,
+    $key: 'm'
+  );
+  @include theme.bg-color('card');
+
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+.page_wrapper {
+  height: calc(100vh - var(--appbar-height) * 1.4);
+  overflow: hidden;
+}
+
+.search_wrapper {
+  @include theme.bg-color('wrapper');
+  position: relative;
+  padding: 1.8rem 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0.4rem 0 auto;
+    margin: auto;
+    display: block;
+    width: 3rem;
+    height: 0.4rem;
+    background-color: map-get($map: var.$text-color, $key: 'primary');
+    opacity: 0.4;
+
+    @include theme.radius('max');
+  }
+
+  .input_wrapper {
+    position: relative;
+
+    .clear_wrapper {
+      position: absolute;
+      inset: 0 0 0 auto;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transform: scale(0);
+      transition: all 0.2s ease;
+
+      @include theme.text-color('secondary');
+      @include theme.ratio('square');
+
+      &.show {
+        transform: scale(1);
+      }
+    }
+  }
+
+  input {
+    padding: 0.5rem 2rem 0.5rem 0.8rem;
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    @include theme.body2();
+    @include theme.text-color('primary');
+    @include theme.radius('s');
+    @include theme.bg-color('surface');
+  }
+}
+
+.loader {
+  padding: 0.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.list_wrapper {
+  height: calc(100vh - var(--appbar-height) * 1.4 - 5.36rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow-y: auto;
+}
+
+.list_item {
+  width: 100% !important;
+  padding: 0.6rem 1.2rem !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1rem;
+
+  .avatar {
+    --avatar-size: 3.2rem;
+  }
+
+  .name_wrapper {
+    flex: 1 !important;
+    p {
+      @include theme.title2();
+      @include mixins.text-ellipsis(80vw);
+      @include theme.text-color('primary');
+    }
+
+    span {
+      @include mixins.text-ellipsis(80vw);
+      @include theme.text-color('primary');
+      @include theme.body2();
+    }
+
+    p,
+    span {
+      display: block;
+      text-align: start;
+    }
+  }
+}
+
+.recent_search_title {
+  padding: 1rem 1.2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h6 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--accent-color);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

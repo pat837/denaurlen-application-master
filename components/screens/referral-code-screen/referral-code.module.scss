@@ -1,0 +1,119 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.root {
+  @include mixins.background-blur(rgba(0 0 0 / 0%), 1.6rem);
+
+  & > *:first-child {
+    background-color: transparent !important;
+  }
+}
+
+.wrapper {
+  padding: 1.6rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  .close_button {
+    position: absolute;
+    inset: 1rem auto auto 1rem;
+
+    svg {
+      width: 1.4rem;
+    }
+
+    @include theme.bg-color('wrapper');
+    @include theme.radius('max');
+  }
+
+  .container {
+    width: 90vw;
+    max-width: 28rem;
+    display: grid;
+    place-items: center;
+    gap: 1.4rem;
+
+    h3 {
+      @include theme.headline1;
+      @include theme.text-color('primary');
+      font-weight: 500 !important;
+    }
+
+    .qrcode_wrapper {
+      background-color: #fff;
+      padding: 0.8rem;
+
+      @include theme.radius('m');
+    }
+
+    .qrcode {
+      path {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+
+        &:nth-last-of-type(1) {
+          fill: #474747;
+        }
+      }
+    }
+
+    .code {
+      padding: 0.36rem 1.3rem !important;
+      display: flex !important;
+      gap: 0.6ch !important;
+
+      @include theme.bg-color('wrapper');
+      @include theme.text-color('secondary');
+      @include theme.headline3();
+      @include theme.radius('m');
+
+      svg {
+        @include theme.text-color('primary');
+      }
+    }
+  }
+}
+
+.list_wrapper {
+  padding-top: 1.8rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  .headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h5 {
+      @include theme.title2;
+      @include theme.text-color('primary');
+    }
+    span {
+      @include theme.title2;
+      @include theme.text-color('primary');
+    }
+  }
+
+  .list_item {
+    --avatar-size: 3.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    .profile {
+      display: grid;
+      p {
+        @include theme.body1;
+        @include theme.text-color('primary');
+      }
+      span {
+        @include theme.body2;
+        @include theme.text-color('secondary');
+      }
+    }
+  }
+}

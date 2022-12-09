@@ -1,0 +1,85 @@
+@use './utils/variables' as var;
+@use './utils/mixins';
+@use './utils/theme';
+
+.home_layout {
+  min-height: calc(100vh - var(--appbar-height) * 2);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  main {
+    max-width: 100%;
+    background-color: map-get($map: var.$background-color, $key: 'paper');
+    @media only screen and (max-width: 490px) {
+      background-color: map-get($map: var.$background-color, $key: 'card');
+    }
+  }
+
+  @media only screen and (min-width: 1080px) {
+    grid-template-columns: 110px auto;
+    min-height: calc(100vh - var(--appbar-height));
+  }
+}
+.profile-layout {
+  .profile-card-wrapper {
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: auto 225px;
+    gap: 36px;
+
+    @media only screen and (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+.profile-bg {
+  isolation: isolate;
+  padding: 2.25rem;
+  @media screen and (max-width: 572px) {
+    padding: 2.6rem;
+  }
+  @media only screen and (max-width: 490px) {
+    padding: 24px;
+    background-color: map-get($map: var.$background-color, $key: 'card');
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 1.8rem;
+  }
+
+  .loader {
+    @include mixins.background-blur();
+
+    position: absolute;
+    inset: 0;
+    transition: all 0.2s ease-in-out;
+
+    display: grid;
+    place-items: center;
+
+    &.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    span {
+      @include theme.body1;
+      @include theme.text-color('primary');
+
+      font-weight: 400;
+      animation: blink 1.2s ease infinite;
+    }
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}

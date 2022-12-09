@@ -1,0 +1,73 @@
+@use '../../../utils/mixins';
+@use '../../../utils/theme';
+@use '../../../utils/variables' as var;
+
+.container {
+  width: 100%;
+  overflow: hidden !important;
+
+  @include theme.ratio('premium');
+  @include theme.radius('m');
+}
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden !important;
+
+  @include theme.ratio('premium');
+}
+
+.blur_wrapper {
+  position: absolute;
+  inset: 0;
+
+  @include mixins.background-blur(transparent, 1rem);
+  @include theme.radius('m');
+  &.show {
+    @include mixins.background-blur(transparent, 0);
+  }
+}
+
+.details {
+  position: absolute;
+  inset: 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .net_worth {
+    @include mixins.background-blur();
+    @include theme.body2();
+    @include theme.radius('max');
+    @include mixins.text-ellipsis(90%);
+
+    padding: 0.28rem 0.7rem;
+    width: min-content;
+    overflow: hidden;
+    filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.4));
+  }
+  .username {
+    margin: auto auto 0.2rem;
+    width: 100% !important;
+    padding: 0.36rem 0.7rem;
+    overflow: hidden;
+    filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.4));
+    @include theme.radius('s');
+    @include mixins.background-blur();
+    @include theme.body2();
+    @include mixins.text-ellipsis(95%);
+  }
+  .net_worth {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    span {
+      @include mixins.text-ellipsis(86%);
+    }
+    .coins {
+      margin-bottom: -0.2rem;
+      width: 1.4rem;
+    }
+  }
+}

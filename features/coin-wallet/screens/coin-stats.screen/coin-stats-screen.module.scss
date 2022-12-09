@@ -1,0 +1,10 @@
+@use '../../../../styles/utils/mixins';
+@use '../../../../styles/utils/theme';
+@use '../../../../styles/utils/variables' as var;
+
+.page {
+  padding: 1rem;
+
+  @include theme.bg-color('card');
+  @include mixins.bottom-entry;
+}

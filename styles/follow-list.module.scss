@@ -1,0 +1,57 @@
+@use './utils/variables' as var;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+
+  [data-profile] {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      --avatar-size: 3.8rem;
+    }
+
+    .username-wrapper {
+      margin-left: 10px;
+      display: grid;
+      text-align: left;
+      gap: 4px;
+
+      p,
+      span {
+        font-weight: 600;
+        font-size: 15px;
+        color: map-get($map: var.$text-color, $key: 'primary');
+      }
+
+      span {
+        font-weight: 500;
+        color: map-get($map: var.$text-color, $key: 'secondary');
+      }
+    }
+  }
+
+  [data-coins] {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-radius: 99px;
+    background-color: rgba(186, 186, 186, 0.2);
+    svg {
+      margin-top: 4px;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.89;
+    }
+  }
+}

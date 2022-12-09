@@ -1,0 +1,144 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .illustration_wrapper {
+    position: relative;
+    background-color: hsl(275, 100%, 97%);
+    display: none;
+    @media screen and (min-width: 840px) {
+      display: block;
+    }
+  }
+
+  .illustrator_container {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    position: sticky;
+    padding-top: calc(min(6vw, 36px));
+    background-color: hsl(275, 100%, 97%);
+    display: none;
+    @media screen and (min-width: 840px) {
+      display: block;
+    }
+  }
+
+  & .form_container {
+    padding-top: calc(min(6vw, 36px));
+  }
+
+  @media screen and (min-width: 840px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.referral-code-dialog {
+  padding: 24px;
+  padding-bottom: 8px;
+  width: 90vh;
+  max-width: 436px !important;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media screen and (max-width: 451px) {
+    padding: 4px;
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 36px;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    text-align: center;
+    color: #343434;
+  }
+
+  p {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    color: #9785a5;
+  }
+
+  .btn-wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--color-accent);
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p:nth-of-type(2) {
+    margin-top: 14px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: #61536b;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    .btn_cont {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+  }
+
+  .error_info_card {
+    background: rgba(244, 67, 54, 0.1);
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #f44336;
+  }
+}
+
+.referral-drawer-wrapper {
+  $borderRadius: 16px;
+  border-top-left-radius: $borderRadius;
+  border-top-right-radius: $borderRadius;
+}
+.referral-drawer {
+  display: grid;
+  place-items: center;
+
+  @media only screen and (max-width: 456px) {
+    .referral-code-dialog {
+      padding: 14px 14px 20px;
+      width: 100%;
+    }
+  }
+}

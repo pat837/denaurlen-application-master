@@ -1,0 +1,8 @@
+@use '../../../styles/utils/_mixins';
+@use '../../../styles/utils/_theme';
+@use '../../../styles/utils/_variables' as var;
+
+.avatar {
+  width: var(--avatar-size, 40px) !important;
+  height: var(--avatar-size, 40px) !important;
+}

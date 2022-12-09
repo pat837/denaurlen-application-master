@@ -1,0 +1,250 @@
+@use '../../utils/mixins' as mixin;
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.page_wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  @include theme.bg-color('card');
+}
+
+.page {
+  width: 100vw;
+  max-width: 36rem;
+}
+
+.navigation_section {
+  padding: 0.8rem;
+  padding-top: 1.2rem;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  gap: 1.4rem;
+
+  & > input[type='radio'] {
+    display: none;
+  }
+
+  nav {
+    $width: 14ch;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, $width);
+    gap: 1rem;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: $width;
+      height: 100%;
+      z-index: 1;
+      transition: all 0.4s cubic-bezier(1, 0.01, 0, 1.01);
+      @include theme.radius('max');
+      @include theme.bg-color('surface');
+    }
+
+    &.player {
+      &::before {
+        transform: translateX(calc($width + 1rem));
+      }
+    }
+    &.uploader,
+    & {
+      &::before {
+        right: auto;
+        left: 0;
+      }
+    }
+
+    label {
+      padding: 0.6rem;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      cursor: pointer;
+
+      @include mixin.body1();
+      @include theme.text-color('primary');
+      @include mixin.pulse-animation();
+    }
+  }
+}
+
+$gap: 1rem;
+
+.screen {
+  padding: 0.36rem 1rem 1rem;
+  height: calc(100vh - var(--appbar-height) * 2 - 64px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+  animation: bottom-entry 0.6s ease 0s 1 normal forwards;
+
+  @include mixin.min-width(1080px) {
+    height: calc(100vh - var(--appbar-height) - 68px);
+  }
+
+  .card {
+    @include theme.bg-color('paper');
+    @include theme.radius('m');
+
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'one one two two three three'
+      'four four four four four four'
+      'five five five six six six';
+    gap: calc(1.8 * $gap) $gap;
+
+    .one {
+      grid-area: one;
+    }
+    .two {
+      grid-area: two;
+    }
+    .three {
+      grid-area: three;
+    }
+    .four {
+      grid-area: four;
+    }
+    .five {
+      grid-area: five;
+    }
+    .six {
+      grid-area: six;
+    }
+
+    .one,
+    .two,
+    .three,
+    .five,
+    .six {
+      display: grid;
+      place-items: center;
+      gap: 0.4rem;
+    }
+
+    .one,
+    .two,
+    .five {
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 10% calc(-1 * $gap / 2) 10% auto;
+        display: block;
+        width: 1px;
+        background-color: map-get($map: var.$text-color, $key: 'disabled');
+        opacity: 0.5;
+        @include theme.radius('max');
+      }
+    }
+
+    .value {
+      @include theme.title1();
+    }
+    .label {
+      @include theme.body3();
+    }
+    .label,
+    .value {
+      @include theme.text-color('primary');
+    }
+
+    .four {
+      position: relative;
+      padding: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: map-get($map: var.$text-color, $key: 'disabled');
+        opacity: 0.5;
+        @include theme.radius('max');
+      }
+      &::before {
+        inset: calc(-1 * $gap / 1.5) 10% auto;
+      }
+      &::after {
+        inset: auto 10% calc(-1 * $gap / 1.5);
+      }
+    }
+  }
+}
+
+.others {
+  h4 {
+    @include theme.title1();
+    margin-bottom: 0.8rem;
+  }
+  & > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    & > li {
+      display: block;
+      overflow: hidden;
+
+      @include theme.bg-color('wrapper');
+      @include theme.radius('m');
+
+      ul {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          padding: 0.75rem 1rem;
+          width: 100% !important;
+          display: flex;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+          gap: 0.75rem;
+          span {
+            @include theme.body1();
+            &:nth-of-type(1) {
+              flex: 1;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.button {
+  padding: 0.75rem 1rem !important;
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes bottom-entry {
+  0% {
+    opacity: 0;
+    transform: translateY(3.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,92 @@
+@use '../../../utils/variables' as var;
+@use '../../../utils/mixins';
+
+.preview_card,
+.wrapper,
+.post_wrapper .loader_wrapper,
+.loader {
+  width: 100%;
+  height: auto;
+  aspect-ratio: map-get($map: var.$aspect-ratio, $key: 'premium') !important;
+  border-radius: map-get($map: var.$border-radius, $key: 'm') !important;
+  overflow: hidden;
+}
+
+.loader_wrapper,
+.post_wrapper {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.wrapper {
+  position: relative;
+  display: grid;
+  background-color: map-get($map: var.$background-color, $key: 'surface');
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  svg {
+    color: #fff;
+    filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.1));
+  }
+}
+
+.preview {
+  @include mixins.background-blur(rgba(38, 38, 38, 0.38), 18px);
+
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: all .36s ease;
+
+  display: grid;
+  place-items: center;
+
+  .w {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    span {
+      color: rgba(255, 255, 255, 0.8) !important;
+      @include mixins.body2;
+    }
+
+    .m {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      svg {
+        color:rgba(255, 255, 255, 0.8) !important;
+      }
+      .like {
+        color:rgba(255, 255, 255, 0.8) !important;
+        path {
+          fill: rgba(255, 255, 255, 0.8) !important;
+        }
+      }
+    }
+  }
+}
+
+.preview_card {
+  @media (hover: hover) {
+    &:hover {
+      .preview {
+        opacity: 1;
+      }
+    }
+  }
+}

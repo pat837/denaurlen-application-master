@@ -1,0 +1,114 @@
+@use './../utils/mixins';
+@use './../utils/theme';
+@use './../utils/variables' as var;
+
+.wrapper {
+  padding: calc(1.5 * var.$root-padding);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  @include theme.bg-color('card');
+}
+
+.title {
+  @include theme.text-color('secondary');
+}
+
+.card {
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.2rem;
+  @include theme.bg-color();
+  @include theme.radius('m');
+
+  .limit_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    code {
+      @include theme.text-color;
+    }
+    span {
+      @include theme.text-color('secondary');
+    }
+  }
+  .share_wrapper {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: row-reverse;
+    .share {
+      @include mixins.body2;
+    }
+  }
+}
+
+.transaction_card {
+  padding-block: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .icon {
+    width: 3.4rem;
+
+    display: grid;
+    place-items: center;
+
+    @include theme.radius('max');
+    @include theme.ratio('square');
+    @include theme.bg-color('wrapper');
+
+    svg {
+      @include theme.text-color('primary');
+    }
+  }
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .account {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      span {
+        @include theme.body1();
+        @include theme.text-color('primary');
+      }
+      svg {
+        width: 1.4rem;
+        @include theme.text-color('secondary');
+      }
+    }
+
+    time {
+      @include theme.body3();
+      @include theme.text-color('secondary');
+    }
+  }
+
+  code {
+    padding-right: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6ch;
+    @include theme.title2();
+    @include theme.text-color('secondary');
+    span {
+      @include theme.title1();
+      color: #1dba80 !important;
+      transform: scale(1.2);
+
+      &.debit {
+        color: #e74c3c !important;
+      }
+    }
+  }
+}

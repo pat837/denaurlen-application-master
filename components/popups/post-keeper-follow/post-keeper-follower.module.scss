@@ -1,0 +1,31 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.popup {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  width: calc(100vw - 2.4rem);
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: center;
+
+  p {
+    @include theme.text-color('secondary');
+    @include theme.body1;
+  }
+
+  .btn_wrapper {
+    padding-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}

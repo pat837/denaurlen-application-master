@@ -1,0 +1,118 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/theme';
+@use '../../../styles/utils/variables' as var;
+
+.section {
+  position: sticky;
+  top: calc(var(--appbar-height) + 1rem);
+  height: calc(100vh - var(--appbar-height) + 1rem);
+  overflow: auto;
+}
+
+.wrapper {
+  padding: 0.9rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  @include theme.bg-color('card');
+  @include theme.radius('m');
+
+  h3 {
+    @include theme.title2;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  counter-reset: rank;
+}
+
+.card {
+  padding: 0.4rem 0;
+  display: flex;
+  gap: 0.2rem;
+
+  .post {
+    @include theme.ratio('premium');
+    @include theme.radius('m');
+
+    position: relative;
+    width: 6rem;
+    overflow: hidden;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(1rem);
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+
+    &.blur {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  .info {
+    flex: 1;
+    padding: 0.7rem 0 0.7rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+
+    .rank_coins {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .rank {
+      &::before {
+        content: '#';
+        @include theme.headline2;
+        @include theme.text-color('disabled');
+      }
+      &::after {
+        counter-increment: rank;
+        content: counter(rank);
+
+        @include theme.display1;
+        @include theme.text-color('secondary');
+      }
+    }
+    .coins {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-bottom: -0.1rem;
+      }
+
+      span {
+        @include theme.title2;
+      }
+    }
+
+    .uploader {
+      @include mixins.text-ellipsis(15ch);
+      @include theme.body1;
+
+      display: grid;
+      overflow: hidden;
+
+      &::before {
+        @include theme.body2;
+        @include theme.text-color('disabled');
+        content: 'uploader';
+      }
+    }
+  }
+}

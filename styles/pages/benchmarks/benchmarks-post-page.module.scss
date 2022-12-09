@@ -1,0 +1,44 @@
+@use '../../utils/mixins';
+@use '../../utils/theme';
+@use '../../utils/variables' as var;
+
+.page_wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'main';
+
+  aside {
+    position: relative;
+    grid-area: side;
+  }
+
+  @include mixins.min-width(1280px) {
+    gap: 1.2rem;
+    grid-template-columns: auto calc(50vh + 4rem) 1.8rem 26.4rem auto;
+    grid-template-areas: '___ main _ side __';
+  }
+}
+
+.page {
+  grid-area: main;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .main {
+    display: grid;
+    grid-template-columns: calc(100vw - 3px);
+    grid-template-areas: 'posts';
+
+    @media only screen and (any-pointer: coarse) {
+      grid-template-columns: 100vw;
+    }
+
+    @media only screen and (min-width: 470px) {
+      grid-template-columns: 470px;
+    }
+    & > div {
+      padding-top: 1rem;
+    }
+  }
+}

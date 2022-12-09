@@ -1,0 +1,223 @@
+@use '../../../styles/utils/mixins';
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/theme';
+
+.root {
+  @include mixins.background-blur(rgba(0 0 0 / 0%), 1.6rem);
+
+  & > *:first-child {
+    background-color: transparent !important;
+  }
+}
+
+.paper {
+  background: none !important;
+  @include theme.bg-color('card');
+}
+
+.wrapper {
+  position: relative;
+  padding-top: 7rem;
+  width: 100vw;
+  max-width: 30rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+
+  h3 {
+    @include theme.display2;
+  }
+
+  .button {
+    $size: 16rem;
+    width: $size;
+    height: $size;
+    display: grid !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: 1.4rem;
+    background-size: 400% 400% !important;
+    background-image: linear-gradient(45deg, #21d4fd, #b721ff, #21d4fd) !important;
+    animation: gradient 10s ease infinite !important;
+    @include theme.radius('m');
+
+    span,
+    svg {
+      color: #fff;
+      @include theme.body1;
+    }
+    svg {
+      width: 3.8rem;
+    }
+
+    &.collected {
+      animation: none !important;
+      background: none !important;
+      @include theme.bg-color('surface');
+
+      span,
+      svg {
+        @include theme.text-color('secondary');
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    gap: 1rem;
+
+    li {
+      @include theme.radius('max');
+
+      $size: 1.4rem;
+      width: $size;
+      height: $size;
+      background-color: transparent;
+      border: 0.2rem solid map-get($map: var.$background-color, $key: 'surface');
+
+      display: grid;
+      place-items: center;
+
+      svg {
+        display: grid;
+        place-items: center;
+        width: 1rem;
+        color: map-get($map: var.$background-color, $key: 'card') !important;
+      }
+
+      &.collected {
+        background-color: #26de81;
+        border-color: #26de81;
+      }
+      &.not_collected {
+        background-color: var.$like-color;
+        border-color: var.$like-color;
+      }
+    }
+  }
+}
+
+.info_button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  svg {
+    width: 1.8rem;
+  }
+}
+
+.close_button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
+  svg {
+    width: 1.8rem;
+  }
+}
+
+.hint {
+  span {
+    @include theme.body3;
+  }
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  span {
+    color: rgba(255, 255, 255, 0.86);
+    scale: 1.2;
+    animation: blink 1.2s ease infinite;
+    @include theme.body1;
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.info_wrapper {
+  position: absolute;
+  inset: 0;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(1rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  & > div {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    p {
+      @include theme.body1;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      font-weight: 400 !important;
+    }
+  }
+  & > span {
+    @include theme.body3;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400 !important;
+  }
+
+  &.show_info {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.timer {
+  display: grid;
+  place-items: center;
+  gap: 0.8rem;
+
+  & > span {
+    @include theme.label1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
